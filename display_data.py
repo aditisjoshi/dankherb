@@ -2,45 +2,44 @@ import serial
 import time
 import math
 
-# setting up serial port
-ser = serial.Serial('/dev/cu.usbmodemFD121', 9600,timeout=5)  # open serial port
-#time.sleep(2)
-
-print("connected to: " + ser.portstr)
-
-data = []
-data_list = []
-light_vals = []
-soil_vals = []
-
 perfect_soil_min = 800;
 perfect_soil_max = 900;
-
 perfect_sunlight_min = 950;
 
-datacollection = True
+def collect_data():
+	# setting up serial port
+	ser = serial.Serial('/dev/cu.usbmodemFD121', 9600,timeout=5)  # open serial port
+	#time.sleep(2)
 
-while datacollection:
-    # print ser.readline()
-    data.append(ser.readline())
+	print("connected to: " + ser.portstr)
 
-    if (len(data) == 10):
-        datacollection = False
-    else:
-        pass
+	data = []
+	data_list = []
+	light_vals = []
+	soil_vals = []
+	datacollection = True
+
+	while datacollection:
+	    # print ser.readline()
+	    data.append(ser.readline())
+
+	    if (len(data) == 10):
+	        datacollection = False
+	    else:
+	        pass
 
 
-for datum in data:
-	data_list = datum.split("/")
-	#print data_list
+	for datum in data:
+		data_list = datum.split("/")
+		#print data_list
 
-	light_vals.append(int(data_list[0]))
-	soil_vals.append(int(data_list[1].rstrip()))
+		light_vals.append(int(data_list[0]))
+		soil_vals.append(int(data_list[1].rstrip()))
 
+	return [light_vals, soil_vals]
 
-
-soil_avg = sum(soil_vals)/len(soil_vals)
-light_avg = sum(light_vals)/len(light_vals)
+def get_data_average(data):
+	return sum(data)/len(data)
 
 def get_soil_state(soil_avg):
 	if soil_avg < perfect_soil_min:
@@ -59,7 +58,8 @@ def get_light_state(light_avg):
 	return "The light shines brightly."
 
 
-
-print get_soil_state(soil_avg)
-print get_light_state(light_avg)
+if __name__ == '__main__':
+	[light_vals, soil_vals] = collect_data()
+	print get_soil_state(get_data_average(soil_vals))
+	print get_light_state(get_data_average(light_vals))
 
