@@ -16,8 +16,7 @@ soil_vals = []
 perfect_soil_min = 800;
 perfect_soil_max = 900;
 
-perfect_sunlight_min = 500;
-perfect_sunlight_max = 600;
+perfect_sunlight_min = 950;
 
 datacollection = True
 
@@ -57,11 +56,8 @@ def get_light_state(light_avg):
 	if light_avg < perfect_sunlight_min:
 		return "There is not enough sunlight. Get lit."
 
-	elif light_avg>=perfect_sunlight_min and light_avg<=perfect_sunlight_max:
-		return "The light shines brightly."
+	return "The light shines brightly."
 
-	else:
-		return "I'm dryin up here!"
 
 
 print get_soil_state(soil_avg)
