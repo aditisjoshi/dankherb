@@ -2,8 +2,8 @@ import serial
 import time
 import math
 
-perfect_soil_min = 800;
-perfect_soil_max = 900;
+perfect_soil_min = 500;
+perfect_soil_max = 650;
 perfect_sunlight_min = 950;
 
 def collect_data():
