@@ -2,13 +2,13 @@ import serial
 import time
 import math
 
-perfect_soil_min = 500;
+perfect_soil_min = 325;
 perfect_soil_max = 650;
 perfect_sunlight_min = 950;
 
 def collect_data():
 	# setting up serial port
-	ser = serial.Serial('/dev/cu.usbmodemFD121', 9600,timeout=5)  # open serial port
+	ser = serial.Serial('/dev/cu.usbmodemFA131', 9600,timeout=5)  # open serial port
 	#time.sleep(2)
 
 	print("connected to: " + ser.portstr)
