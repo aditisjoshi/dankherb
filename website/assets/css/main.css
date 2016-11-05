@@ -1922,15 +1922,15 @@
 			}
 
 		.icon.style1 {
-			color: #00ffcc;
+			color: #F78E69;
 		}
 
 		.icon.style2 {
-			color: #00f0ff;
+			color: #F7EF99;
 		}
 
 		.icon.style3 {
-			color: #76ddff;
+			color: #F78E69;
 		}
 
 /* Image */
@@ -2641,8 +2641,8 @@
 		}
 
 		.wrapper.style1 {
-			background-color: #21b2a6;
-			color: #c7ebe8;
+			background-color: #F1BB87;
+			color: #F7EF99;
 		}
 
 			.wrapper.style1 strong, .wrapper.style1 b {
@@ -2650,7 +2650,7 @@
 			}
 
 			.wrapper.style1 h2, .wrapper.style1 h3, .wrapper.style1 h4, .wrapper.style1 h5, .wrapper.style1 h6 {
-				color: #ffffff;
+				color: #F78E69;
 			}
 
 			.wrapper.style1 hr {
@@ -2674,7 +2674,7 @@
 			}
 
 			.wrapper.style1 header.major p {
-				color: #c7ebe8;
+				color: #FFF;
 			}
 
 			.wrapper.style1 label {
@@ -3160,7 +3160,7 @@
 		-ms-transition: -ms-transform 0.5s ease;
 		transition: transform 0.5s ease;
 		-webkit-overflow-scrolling: touch;
-		background: #21b2a6;
+		background: #F1BB87;
 		color: #ffffff;
 		height: 100%;
 		max-width: 80%;
