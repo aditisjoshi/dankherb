@@ -26,8 +26,10 @@ def collect_data():
 
     data = []
     data_list = []
-    light_vals = []
-    soil_vals = []
+    light_vals1 = []
+    soil_vals1 = []
+    light_vals2 = []
+    soil_vals2 = []
     datacollection = True
 
     while datacollection:
@@ -44,10 +46,12 @@ def collect_data():
         data_list = datum.split("/")
         #print data_list
 
-        light_vals.append(int(data_list[0]))
-        soil_vals.append(int(data_list[1].rstrip()))
+        light_vals1.append(int(data_list[0]))
+        soil_vals1.append(int(data_list[1]))
+        light_vals2.append(int(data_list[2]))
+        soil_vals2.append(int(data_list[3]).rstip())
 
-    return [light_vals, soil_vals]
+    return [light_vals1, soil_vals1, light_vals2, soil_vals2]
 
 def get_data_average(data):
     return sum(data)/len(data)
@@ -86,7 +90,7 @@ class GardenaiApp(App):
         # [light_vals, soil_vals] = collect_data()
         # return Label(text=get_soil_state(get_data_average(soil_vals))+"\n"+get_light_state(get_data_average(light_vals)))
 
-        return Label(text=get_soil_state((600))+"\n"+get_light_state((900)))
+        return Label(text="TOM GORE:"+"\n"+get_soil_state((600))+"\n"+get_light_state((900))+"\n"+"MARY JANE:"+"\n"+get_soil_state((800))+"\n"+get_light_state((400)))
 
 
 
