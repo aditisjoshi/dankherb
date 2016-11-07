@@ -87,9 +87,11 @@ class HomeScreen(GridLayout):
 class GardenaiApp(App):
 
     def build(self):
-        # [light_vals, soil_vals] = collect_data()
-        # return Label(text=get_soil_state(get_data_average(soil_vals))+"\n"+get_light_state(get_data_average(light_vals)))
+        # this is what we should actually use 
+        # [light_vals1, soil_vals1, light_vals2, soil_vals2] = collect_data()
+        # return Label(text="TOM GORE:"+"\n"+get_soil_state(get_data_average(soil_vals1))+"\n"+get_light_state(get_data_average(light_vals1))+"\n"+"MARY JANE:"+"\n"+get_soil_state(get_data_average(soil_vals2))+"\n"+get_light_state(get_data_average(light_vals2)))
 
+        # this is for testing without arduino
         return Label(text="TOM GORE:"+"\n"+get_soil_state((600))+"\n"+get_light_state((900))+"\n"+"MARY JANE:"+"\n"+get_soil_state((800))+"\n"+get_light_state((400)))
 
 
