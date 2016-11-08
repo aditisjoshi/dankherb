@@ -17,11 +17,8 @@ class Plant(object):
         self.soil_vals = [400,500]
         self.light_vals = [800,1000]
 
-        self.light_status = "TEST"
-        self.soil_status = "TEST"
 
-
-    def get_data_average(data):
+    def get_data_average(self,data):
         return sum(data)/len(data)
 
 
@@ -41,7 +38,7 @@ class Plant(object):
 
 
     def get_light_state(self):
-        light_avg = self.get_data_average(self.light_avg)
+        light_avg = self.get_data_average(self.light_vals)
         if light_avg < self.perfect_sunlight_min:
             self.light_status = "There is not enough sunlight. Get lit."
             return 

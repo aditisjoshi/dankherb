@@ -4,12 +4,12 @@ from plant import Plant
 # this script creates a garden class for the gui
 class Garden(object):
 
-    def __init__(self, no_plants):
+    def __init__(self, no_plants, plant_names, plant_types):
         # initalizing the garden object
         self.no_plants = no_plants
         self.plants = []
         for i in range(0,self.no_plants):
-            self.plants.append(Plant("Tom Gore", "Thyme"))
+            self.plants.append(Plant(plant_names[i], plant_types[i]))
 
 
 

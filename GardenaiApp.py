@@ -18,12 +18,16 @@ from garden import Garden
 
 class GardenaiGame(Widget):
     our_garden = ObjectProperty(None)
-    our_garden = Garden(2)
+    our_garden = Garden(2,["Tom Gore", "Mary Jane"], ["Thyme", "Cilantro"])
 
-    # our_garden.plant1.name
-    # our_garden.plant1.type = Plant("Tom Gore", "Thyme")
-    our_garden.plants[1].name = "Mary Jane" 
-    our_garden.plants[1].herb = "Cilantro"
+    # FOR TESTING WHEN WE ARE NOT HOOKED UP TO ARDUINO
+    for plant in our_garden.plants:
+        plant.get_soil_state()
+        plant.get_light_state()
+
+
+    # UNCOMMENT THIS LINE WHEN WE ARE HOOKED UP TO ARDUINO
+    # our_garden.collect_data()
 
 
 class HomeScreen(GridLayout):
@@ -38,16 +42,10 @@ class HomeScreen(GridLayout):
         # self.add_widget(Label(Text="Thyme"))
         pass 
 
+
 class GardenaiApp(App):
 
     def build(self):
-        # this is what we should actually use 
-        # [light_vals1, soil_vals1, light_vals2, soil_vals2] = collect_data()
-        # return Label(text="TOM GORE:"+"\n"+get_soil_state(get_data_average(soil_vals1))+"\n"+get_light_state(get_data_average(light_vals1))+"\n"+"MARY JANE:"+"\n"+get_soil_state(get_data_average(soil_vals2))+"\n"+get_light_state(get_data_average(light_vals2)))
-
-        # this is for testing without arduino
-        # return Label(text="TOM GORE:"+"\n"+get_soil_state((600))+"\n"+get_light_state((900))+"\n"+"MARY JANE:"+"\n"+get_soil_state((800))+"\n"+get_light_state((400)))
-
         return GardenaiGame()
 
 
