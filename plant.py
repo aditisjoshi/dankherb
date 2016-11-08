@@ -13,9 +13,14 @@ class Plant(object):
         self.perfect_soil_max = 650;
         self.perfect_sunlight_min = 950;
 
-        # this is for testing
-        self.soil_vals = [400,500]
-        self.light_vals = [800,1000]
+
+    def update_soil_standards(self,soil_min,soil_max):
+        self.perfect_soil_min = soil_min
+        self.perfect_soil_max = soil_max
+
+
+    def update_light_standards(self,sunlight_min):
+        self.perfect_sunlight_min = sunlight_min
 
 
     def get_data_average(self,data):

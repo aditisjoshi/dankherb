@@ -57,6 +57,7 @@ class Garden(object):
             # soil_vals1.append(int(data_list[1]))
             # light_vals2.append(int(data_list[2]))
             # soil_vals2.append(int(data_list[3]))
+            
         for plant in plants:
             plant.get_soil_state()
             plant.get_light_state()
