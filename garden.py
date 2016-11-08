@@ -8,8 +8,13 @@ class Garden(object):
         # initalizing the garden object
         self.no_plants = no_plants
         self.plants = []
+
+        # dictionary of standards for the different herbs
+        # [soil min, soil max, sunlight min]
+        self.herbs = {"Thyme":[325,650,950], "Cilantro":[325,650,950]}
+
         for i in range(0,self.no_plants):
-            self.plants.append(Plant(plant_names[i], plant_types[i]))
+            self.plants.append(Plant(plant_names[i], plant_types[i],self.herbs.get(plant_types[i],None)))
 
 
 
@@ -57,7 +62,7 @@ class Garden(object):
             # soil_vals1.append(int(data_list[1]))
             # light_vals2.append(int(data_list[2]))
             # soil_vals2.append(int(data_list[3]))
-            
+
         for plant in plants:
             plant.get_soil_state()
             plant.get_light_state()
