@@ -19,7 +19,7 @@ int soilSensorPin2 = A2;
 int lightSensorVal2;
 int lightSensorPin2 = A3;
 
-int pumpPin = 13;
+int pumpPin = 0;
 
 
 
