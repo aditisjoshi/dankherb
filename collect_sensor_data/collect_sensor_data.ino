@@ -1,3 +1,11 @@
+#include <Adafruit_NeoPixel.h>
+
+#define PIN     10
+#define N_LEDS  20
+
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(N_LEDS, PIN, NEO_GRB + NEO_KHZ800);
+
+
 int soilSensorVal1;
 int soilSensorPin1 = A0;
 
@@ -11,10 +19,15 @@ int soilSensorPin2 = A2;
 int lightSensorVal2;
 int lightSensorPin2 = A3;
 
+int pumpPin = 13;
+
+
 
 void setup() {
+  pinMode(pumpPin, OUTPUT);      // sets the digital pin as output
+  strip.begin();
   // put your setup code here, to run once:
-  Serial.begin(9600);
+  Serial.begin(9600); 
 }
 
 void loop() {
@@ -24,6 +37,18 @@ void loop() {
 
   soilSensorVal2 = analogRead(soilSensorPin2);
   lightSensorVal2 = analogRead(lightSensorPin2);
+  
+  if (lightSensorVal1 < 400) {
+    chase(strip.Color(255, 255, 255)); // Red
+  } else {
+    chase(strip.Color(0, 0, 0));
+  }
+
+  if (soilSensorVal1 < 400) {
+    digitalWrite(pumpPin, HIGH);   // sets the LED on
+  } else {
+    digitalWrite(pumpPin, LOW);   // sets the LED on
+  }
 
   //Serial.print("light = ");
   Serial.print(lightSensorVal1);
@@ -34,3 +59,11 @@ void loop() {
   Serial.print("/");
   Serial.println(soilSensorVal2);
 }
+
+
+static void chase(uint32_t c) {
+  for(uint16_t i=0; i<strip.numPixels(); i++) {
+      strip.setPixelColor(i  , c); // Draw new pixel
+      strip.show();
+  }
+} 

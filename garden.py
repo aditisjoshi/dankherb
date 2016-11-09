@@ -60,6 +60,7 @@ class Garden(object):
 
             # light_vals1.append(int(data_list[0]))
             # soil_vals1.append(int(data_list[1]))
+            
             # light_vals2.append(int(data_list[2]))
             # soil_vals2.append(int(data_list[3]))
 
