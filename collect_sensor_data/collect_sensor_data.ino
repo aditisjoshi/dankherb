@@ -19,7 +19,7 @@ int soilSensorPin2 = A2;
 int lightSensorVal2;
 int lightSensorPin2 = A3;
 
-int pumpPin = 0;
+int pumpPin = 8;
 
 
 
@@ -38,26 +38,23 @@ void loop() {
   soilSensorVal2 = analogRead(soilSensorPin2);
   lightSensorVal2 = analogRead(lightSensorPin2);
   
-  if (lightSensorVal1 < 400) {
+  if (lightSensorVal1 < 950) {
     chase(strip.Color(255, 255, 255)); // Red
   } else {
     chase(strip.Color(0, 0, 0));
   }
 
-  if (soilSensorVal1 < 400) {
-    digitalWrite(pumpPin, HIGH);   // sets the LED on
-  } else {
-    digitalWrite(pumpPin, LOW);   // sets the LED on
-  }
+  digitalWrite(pumpPin, HIGH);
+//  if (soilSensorVal1 < 800) {
+//    digitalWrite(pumpPin, HIGH);   // sets the pump on
+//  } else {
+//    digitalWrite(pumpPin, LOW);   // sets the pump off
+//  }
 
   //Serial.print("light = ");
   Serial.print(lightSensorVal1);
   Serial.print("/");
   Serial.println(soilSensorVal1);
-  Serial.print("/");
-  Serial.print(lightSensorVal2);
-  Serial.print("/");
-  Serial.println(soilSensorVal2);
 }
 
 
