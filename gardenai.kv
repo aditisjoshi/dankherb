@@ -3,65 +3,128 @@
 <GardenaiGame>:    
     canvas:
         Rectangle:
-            pos: self.center_x - 5, 0
+            pos: self.center_x , 0
             size: 10, self.height
+
+        Rectangle:
+            pos: 0, self.center_y 
+            size: self.width, 10
+
+
+
             
     Label:
-        font_size: 70  
+        font_size: 50  
         center_x: root.width / 4
-        top: root.top - 50
+        top: root.top - 10
         text: root.our_garden.plants[0].name
         
     Label:
-        font_size: 70  
+        font_size: 50  
         center_x: root.width * 3 / 4
-        top: root.top - 50
+        top: root.top - 10
         text: root.our_garden.plants[1].name
 
     Label:
-        font_size: 40  
+        font_size: 50  
         center_x: root.width / 4
-        top: root.top - 120
+        top: root.top / 2 - 10
+        text: root.our_garden.plants[2].name
+        
+    Label:
+        font_size: 50  
+        center_x: root.width * 3 / 4
+        top: root.top / 2 - 10
+        text: root.our_garden.plants[3].name
+
+
+
+
+
+    Label:
+        font_size: 30  
+        center_x: root.width / 4
+        top: root.top - 60
         text: root.our_garden.plants[0].herb
         
     Label:
-        font_size: 40  
+        font_size: 30  
         center_x: root.width * 3 / 4
-        top: root.top - 120
+        top: root.top - 60
         text: root.our_garden.plants[1].herb
+
+    Label:
+        font_size: 30  
+        center_x: root.width / 4
+        top: root.top / 2 - 60
+        text: root.our_garden.plants[2].herb
+        
+    Label:
+        font_size: 30  
+        center_x: root.width * 3 / 4
+        top: root.top / 2 - 60
+        text: root.our_garden.plants[3].herb
+
+
 
 
 
     Label:
         text_size: (root.width / 2.5), None
-        font_size: 30  
+        font_size: 20 
         center_x: root.width / 4
-        top: root.top - 250
+        top: root.top - 125
         text: root.our_garden.plants[0].soil_status
         
     Label:
         text_size: (root.width / 2.5), None
-        font_size: 30  
+        font_size: 20 
         center_x: root.width * 3 / 4
-        top: root.top - 250
+        top: root.top - 125
         text: root.our_garden.plants[1].soil_status
-
-
 
     Label:
         text_size: (root.width / 2.5), None
-        font_size: 30  
+        font_size: 20 
         center_x: root.width / 4
-        top: root.top - 350
+        top: root.top - 175
         text: root.our_garden.plants[0].light_status
         
     Label:
         text_size: (root.width / 2.5), None
-        font_size: 30  
+        font_size: 20 
         center_x: root.width * 3 / 4
-        top: root.top - 350
+        top: root.top - 175
         text: root.our_garden.plants[1].light_status
 
+
+    Label:
+        text_size: (root.width / 2.5), None
+        font_size: 20 
+        center_x: root.width / 4
+        top: root.top /2 - 125
+        text: root.our_garden.plants[2].soil_status
+        
+    Label:
+        text_size: (root.width / 2.5), None
+        font_size: 20 
+        center_x: root.width * 3 / 4
+        top: root.top /2 - 125
+        text: root.our_garden.plants[3].soil_status
+
+    Label:
+        text_size: (root.width / 2.5), None
+        font_size: 20 
+        center_x: root.width / 4
+        top: root.top /2 - 175
+        text: root.our_garden.plants[2].light_status
+        
+    Label:
+        text_size: (root.width / 2.5), None
+        font_size: 20 
+        center_x: root.width * 3 / 4
+        top: root.top /2 - 175
+        text: root.our_garden.plants[3].light_status
 
 
 
