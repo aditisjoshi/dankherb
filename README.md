@@ -16,13 +16,13 @@ The python depends on the following libraries:
 The code is programmed using Python 2.7. Use the instructions [here](https://www.python.org/downloads/) to download it if you do not have it.
 
 #### Kivy
-You can use `pip install kivy` to download this package. 
+You can use `$pip install kivy` to download this package. 
 
 ##### A Note About Pygame
-You can use `pip install pygame` to download this package. 
+You can use `$pip install pygame` to download this package. 
 
 #### Serial
-You can use `pip install pyserial` to download this package. 
+You can use `$pip install pyserial` to download this package. 
 
 ### To Run
 In order to run the GUI, you must first run the Arduino code and then move over to python and run GardenaiApp.py. A window should appear that should give you information about the plants and their status. You can close the app when you are done with it.
