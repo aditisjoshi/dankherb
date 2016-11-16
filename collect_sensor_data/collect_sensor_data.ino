@@ -93,10 +93,12 @@ void loop() {
 
 
   // this is the control code for the water NEEDS TO BE FIXED
-  if (soilSensorVal1 < 800) {
+  if ((soilSensorVal1 + soilSensorVal2 + soilSensorVal3 + soilSensorVal4)/4 < 800) {
     digitalWrite(pumpPin, HIGH);   // sets the LED on
+    delay(1000000);
   } else {
     digitalWrite(pumpPin, LOW);   // sets the LED on
+    delay(1000000);
   }
 
 
