@@ -29,7 +29,7 @@ class GardenaiGame(Widget):
         plant.get_light_state()
 
     # UNCOMMENT THIS LINE WHEN WE ARE HOOKED UP TO ARDUINO
-    our_garden.collect_data()
+    # our_garden.collect_data()
 
 
 class GardenaiApp(App):
