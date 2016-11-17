@@ -18,7 +18,6 @@ int soilSensorPin2 = A2;
 int lightSensorVal2;
 int lightSensorPin2 = A3;
 
-
 int soilSensorVal3;
 int soilSensorPin3 = A4;
 
@@ -105,7 +104,6 @@ void loop() {
   Serial.print(lightSensorVal1);
   Serial.print("/");
   Serial.println(soilSensorVal1);
-
   Serial.print("/");
   Serial.print(lightSensorVal2);
   Serial.print("/");
