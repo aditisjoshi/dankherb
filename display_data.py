@@ -8,7 +8,7 @@ perfect_sunlight_min = 950;
 
 def collect_data():
     # setting up serial port
-    ser = serial.Serial('/dev/cu.usbmodemFA131', 9600,timeout=5)  # open serial port
+    ser = serial.Serial('/dev/cu.usbmodem61', 9600,timeout=5)  # open serial port
     #time.sleep(2)
 
     print("connected to: " + ser.portstr)

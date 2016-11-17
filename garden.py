@@ -1,5 +1,6 @@
 
 from plant import Plant
+import serial
 
 # this script creates a garden class for the gui
 class Garden(object):
@@ -20,7 +21,7 @@ class Garden(object):
 
     def collect_data(self):
         # setting up serial port
-        ser = serial.Serial('/dev/cu.usbmodemFA131', 9600,timeout=5)  # open serial port
+        ser = serial.Serial('/dev/cu.usbmodem61', 9600,timeout=5)  # open serial port
         #time.sleep(2)
 
         print("connected to: " + ser.portstr)
@@ -54,9 +55,9 @@ class Garden(object):
         for i,datum in enumerate(data_list):
             plant_no = i / 2
             if (i % 2) == 0:
-                plants[plant_no].light_vals.append(int(datum))
+                self.plants[plant_no].light_vals.append(int(datum))
             else:
-                plants[plant_no].soil_vals.append(int(datum))
+                self.plants[plant_no].soil_vals.append(int(datum))
 
             # light_vals1.append(int(data_list[0]))
             # soil_vals1.append(int(data_list[1]))
@@ -64,7 +65,7 @@ class Garden(object):
             # light_vals2.append(int(data_list[2]))
             # soil_vals2.append(int(data_list[3]))
 
-        for plant in plants:
+        for plant in self.plants:
             plant.get_soil_state()
             plant.get_light_state()
 
