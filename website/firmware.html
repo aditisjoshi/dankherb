@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Mechanical System</title>
+		<title>Firmware</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -46,22 +46,41 @@
 				<!-- Main -->
 					<article id="main">
 						<header class="mechanical">
-							<h2>Mechanical System</h2>
+							<h2>Firmware</h2>
 						</header>
 						<section class="wrapper style5">
 							<div class="inner">
 
-								<h3>Lorem ipsum dolor</h3>
-								<p>Morbi mattis mi consectetur tortor elementum, varius pellentesque velit convallis. Aenean tincidunt lectus auctor mauris maximus, ac scelerisque ipsum tempor. Duis vulputate ex et ex tincidunt, quis lacinia velit aliquet. Duis non efficitur nisi, id malesuada justo. Maecenas sagittis felis ac sagittis semper. Curabitur purus leo, tempus sed finibus eget, fringilla quis risus. Maecenas et lorem quis sem varius sagittis et a est. Maecenas iaculis iaculis sem. Donec vel dolor at arcu tincidunt bibendum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce ut aliquet justo. Donec id neque ipsum. Integer eget ultricies odio. Nam vel ex a orci fringilla tincidunt. Aliquam eleifend ligula non velit accumsan cursus. Etiam ut gravida sapien.</p>
+								<h3>Arduino Control</h3>
+								
+								<p> We controlled our system using an Arduino Uno R3 microcontroller and code written in Arduino-C. The microcontroller was connected to an AdaFruit motor shield because the current drawn by our individually addressable LEDs was enough to ruin the microcontroller. </p>
 
-								<p>Vestibulum ultrices risus velit, sit amet blandit massa auctor sit amet. Sed eu lectus sem. Phasellus in odio at ipsum porttitor mollis id vel diam. Praesent sit amet posuere risus, eu faucibus lectus. Vivamus ex ligula, tempus pulvinar ipsum in, auctor porta quam. Proin nec dui cursus, posuere dui eget interdum. Fusce lectus magna, sagittis at facilisis vitae, pellentesque at etiam. Quisque posuere leo quis sem commodo, vel scelerisque nisi scelerisque. Suspendisse id quam vel tortor tincidunt suscipit. Nullam auctor orci eu dolor consectetur, interdum ullamcorper ante tincidunt. Mauris felis nec felis elementum varius.</p>
+								<p> Through the motor controller, we connected our sensors to analog pins, which we ran as input. The program took the sensor input and evaluated how the system, the lights and irrigation system, should respond given the input. </p>
 
-								<hr />
+								<h5> Water Control </h5>
 
-								<h4>Feugiat aliquam</h4>
-								<p>Nam sapien ante, varius in pulvinar vitae, rhoncus id massa. Donec varius ex in mauris ornare, eget euismod urna egestas. Etiam lacinia tempor ipsum, sodales porttitor justo. Aliquam dolor quam, semper in tortor eu, volutpat efficitur quam. Fusce nec fermentum nisl. Aenean erat diam, tempus aliquet erat.</p>
+								<p>We then ran a digital pin as an output to control the water pump. When the moisture was at a low enough threshold, we set the digital pin to HIGH to send voltage to the pump. </p>
 
-								<p>Etiam iaculis nulla ipsum, et pharetra libero rhoncus ut. Phasellus rutrum cursus velit, eget condimentum nunc blandit vel. In at pulvinar lectus. Morbi diam ante, vulputate et imperdiet eget, fermentum non dolor. Ut eleifend sagittis tincidunt. Sed viverra commodo mi, ac rhoncus justo. Duis neque ligula, elementum ut enim vel, posuere finibus justo. Vivamus facilisis maximus nibh quis pulvinar. Quisque hendrerit in ipsum id tellus facilisis fermentum. Proin mauris dui, at vestibulum sit amet, auctor bibendum neque.</p>
+
+								<h5> Light Control </h5>
+								<p> To control the lights (individually addressable LEDS), we used the Adafruit Neopixel library. The following line creates the object that will control the lights: </p>
+
+
+								<pre> <code>Adafruit_NeoPixel strip = Adafruit_NeoPixel(N_LEDS, PIN, NEO_GRB + NEO_KHZ800); </code></pre>
+
+
+								<p> The first parameter is the number of LEDS in the strip. The second parameter denotes the analog pin to which the LED strip has been attached. The final parameter describes the type of neopixels that are being controlled. </p>
+
+
+								<p> The lights respond to data from the light sensors on the different plants. When any sensor value gets too low, the LEDs closest to the corresponding plant are turned on. We use full white light because that provides all different colors of the spectrum to the plants, fulfilling their needs. </p>
+
+
+								<p> The lights are controlled by this code:</p>
+
+								<pre> <code>strip.setPixelColor(i  , c); // Draw new pixel
+strip.show(); </code></pre>
+								
+								<p> The first line sets the color of the LED at a particular index on the strip, and the second has the light display the color.</p>
 
 							</div>
 						</section>
