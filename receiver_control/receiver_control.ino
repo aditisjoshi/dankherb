@@ -45,9 +45,10 @@ void loop() {
   }
 
   
-  //Serial.println("START");
+  Serial.println("START");
+  Serial.print("LIGHT");
   Serial.print(lightSensorVal1);
-  Serial.print("/");
+  Serial.print("SOIL");
   Serial.println(soilSensorVal1);
   Serial.print("/");
   Serial.print(lightSensorVal2);
@@ -61,24 +62,23 @@ void loop() {
   Serial.print(lightSensorVal4);
   Serial.print("/");
   Serial.println(soilSensorVal4);
-  //Serial.println("END");
+  Serial.println("END");
 }
 
 void receiveEvent(int howMany) {
   while(Wire.available()) {
     if (Wire.available()%2 == 1) { 
       i = Wire.read();
-      //Serial.print(i);
-      if (c == "a") {
+      if (c == 'a') {
         lightSensorVal1 = i;
       }
-      else if (c == "b") {
+      else if (c == 'b') {
         lightSensorVal2 = i;
       }
-      else if (c == "c") {
+      else if (c == 'c') {
         lightSensorVal3 = i;
       }
-      else if (c == "d") {
+      else if (c == 'd') {
         lightSensorVal4 = i;
       }
     } else {

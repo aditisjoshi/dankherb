@@ -40,11 +40,11 @@ void sendDatatoReceiver() {
   Wire.write("a");
   Wire.write(lightSensorVal1);
   Wire.write("b");
-  Wire.write(lightSensorVal2);
+  Wire.write(lightSensorVal1);
   Wire.write("c");
-  Wire.write(lightSensorVal3);
+  Wire.write(lightSensorVal1);
   Wire.write("d");
-  Wire.write(lightSensorVal4);
+  Wire.write(lightSensorVal1);
   Wire.endTransmission();
 
   delay(100);
