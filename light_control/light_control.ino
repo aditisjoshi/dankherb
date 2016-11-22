@@ -19,24 +19,27 @@
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(N_LEDS, PIN, NEO_GRB + NEO_KHZ800);
 
 //sensor val to lux calibration values
-float a = 3.60357776682*pow(10,-8);
-float b = -5.35983142788*pow(10,-5);
-float c = 0.0248690097221;
-float d = -3.58641388043;
-float e = 106.046836289;
+const float a = 3.60357776682*pow(10,-8);
+const float b = -5.35983142788*pow(10,-5);
+const float c = 0.0248690097221;
+const float d = -3.58641388043;
+const float e = 106.046836289;
 
 //conversion constants for lux -> ppfd -> dli
-int ppfdConversionConstant = 0.029; //Sunlight 0.0185, Fluorescent (Grolux) 0.029
-int dliConversionConstant = 0.0864; //The 0.0864 factor is the total number of seconds in a day divided by 1,000,000 (to convert umol to mol)
+const int ppfdConversionConstant = 0.029; //Sunlight 0.0185, Fluorescent (Grolux) 0.029
+const int dliConversionConstant = 0.0864; //The 0.0864 factor is the total number of seconds in a day divided by 1,000,000 (to convert umol to mol)
 
 //adding up lux to get daily light integral (DLI)
 float dailyLuxVals[24];
 int hour = 1;
 int tStartHour;
 int tCurrent;
-int oneHour = 3.6 * pow(10, 6); //one hour in milliseconds
+const int oneHour = 3.6 * pow(10, 6); //one hour in milliseconds
 int currentLuxVal;
 float currentDLI;
+
+const int minDLI = 12;
+const int maxDLI = 16;
 
 int lightSensorVal;
 int luxVal;
@@ -56,7 +59,7 @@ void loop() {
   }
 
   currentDLI = getDLI();
-  if (12 < currentDLI && currentDLI < 16) {
+  if (minDLI < currentDLI && currentDLI < maxDLI) {
     //update the lights somehow!
   }
   
