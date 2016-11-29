@@ -2,7 +2,7 @@
 #include <Adafruit_NeoPixel.h>
 
 #define PIN     10
-#define N_LEDS  20
+#define N_LEDS  10
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(N_LEDS, PIN, NEO_GRB + NEO_KHZ800);
 
@@ -25,19 +25,22 @@ int num3 = (3 * N_LEDS) / 4;
 int num4 = (4 * N_LEDS) / 4;
 
 //sensor val to lux calibration values
-const float a = 3.60357776682*pow(10,-8);
-const float b = -5.35983142788*pow(10,-5);
-const float c = 0.0248690097221;
-const float d = -3.58641388043;
-const float e = 106.046836289;
+const float a = -6.04174634356*pow(10,-14);
+const float b = 1.73210693561*pow(10,-10);
+const float c = -1.80136355915*pow(10, -7);
+const float d = 8.6163611226*pow(10,-5);
+const float e = -0.0191817214905;
+const float f = 1.80117265067;
+const float g = -42.2194133246;
 
 //conversion constants for lux -> ppfd -> dli
-const int ppfdConversionConstant = 0.029; //Sunlight 0.0185, Fluorescent (Grolux) 0.029
-const int dliConversionConstant = 0.0864; //The 0.0864 factor is the total number of seconds in a day divided by 1,000,000 (to convert umol to mol)
+const float ppfdConversionConstant = 0.029; //Sunlight 0.0185, Fluorescent (Grolux) 0.029
+const float dliConversionConstant = 0.0864; //The 0.0864 factor is the total number of seconds in a day divided by 1,000,000 (to convert umol to mol)
 
 //adding up lux to get daily light integral (DLI)
 float dailyLuxVals[4][24];
-int hour = 1;
+ 
+int hour = 0;
 int tStartHour;
 int tCurrent;
 const int oneHour = 3.6 * pow(10, 6); //one hour in milliseconds
@@ -53,12 +56,19 @@ const int maxDLI = 16;
 void setup() {
   // put your setup code here, to run once:
   Wire.begin();
+  Serial.begin(9600);
   strip.begin();
+//for (int j=0;j<24;j++) {
+//  dailyLuxVals[0][j] = 0;
+//  dailyLuxVals[1][j] = 0;
+//  dailyLuxVals[2][j] = 0;
+//  dailyLuxVals[3][j] = 0;
+//}
 }
 
 void loop() {
-  readLights();
-//  controlLights();
+  updateLights();
+  controlLights();
   sendDatatoReceiver();
 }
 
@@ -77,54 +87,27 @@ void sendDatatoReceiver() {
   delay(100);
 }
 
-void readLights() {
-  lightSensorVal1 = analogRead(lightSensorPin1);
-//  lightSensorVal2 = analogRead(lightSensorPin2);
-//  lightSensorVal3 = analogRead(lightSensorPin3);
-//  lightSensorVal4 = analogRead(lightSensorPin4);
+void updateLights() {
+  if (updateTime()) { //returns true if an hour has passed, false if not
+    updateDailyLightValues(0, lightSensorPin1);
+    updateDailyLightValues(1, lightSensorPin2);
+    updateDailyLightValues(2, lightSensorPin3);
+    updateDailyLightValues(3, lightSensorPin4);
+  }
 }
 
 void controlLights() {
-
-  if (updateTime()) { //returns true if an hour has passed, false if not
-    updateDailyLightValues(lightSensorPin1);
-    updateDailyLightValues(lightSensorPin2);
-    updateDailyLightValues(lightSensorPin3);
-    updateDailyLightValues(lightSensorPin4);
-  }
-
-  currentDLI1 = getDLI(lightSensorPin1);
-  currentDLI2 = getDLI(lightSensorPin2);
-  currentDLI3 = getDLI(lightSensorPin3);
-  currentDLI4 = getDLI(lightSensorPin4);
+  currentDLI1 = getDLI(0);
+//  currentDLI2 = getDLI(2);
+//  currentDLI3 = getDLI(3);
+//  currentDLI4 = getDLI(4);
   
   if (minDLI < currentDLI1 && currentDLI1 < maxDLI) {
     //update the lights somehow!
-  }
-  
-  if (lightSensorVal1 < 950) {
     chase(strip.Color(255, 255, 255), 0, num1); // Red
   } else {
     chase(strip.Color(0, 0, 0),0, num1);
   }
-
-//  if (lightSensorVal2 < 950) {
-//    chase(strip.Color(255, 255, 255), num1, num2); // Red
-//  } else {
-//    chase(strip.Color(0, 0, 0), num1, num2);
-//  }
-
-//  if (lightSensorVal3 < 950) {
-//    chase(strip.Color(255, 255, 255), num2, num3); // Red
-//  } else {
-//    chase(strip.Color(0, 0, 0), num2, num3);
-//  }
-//
-//  if (lightSensorVal4 < 950) {
-//    chase(strip.Color(255, 255, 255), num4, N_LEDS); // Red
-//  } else {
-//    chase(strip.Color(0, 0, 0), num4, N_LEDS);
-//  }
 }
 
 //CONTROL THE LIGHTS FUNCTIONS
@@ -143,7 +126,7 @@ boolean updateTime() {
   tCurrent = millis();
  
   //if an hour has passed
-  if ((tCurrent - tStartHour) >= oneHour) { 
+  if ((tCurrent - tStartHour) >= 500) { 
     //update the start of the hour
     tStartHour = tCurrent;
     // update the hour number we are on
@@ -156,40 +139,42 @@ boolean updateTime() {
   return false;
 }
 
-void updateDailyLightValues(int pin) {
-  currentLuxVal = sensorToLux(getSensorVal(pin));
-  addLuxtoAverage(pin,currentLuxVal, hour);
+void updateDailyLightValues(int sensorNum, int sensorPin) {
+  currentLuxVal = sensorToLux(getSensorVal(sensorPin));
+  addLuxtoAverage(sensorNum, currentLuxVal);
 }
 
-float addLuxtoAverage(int pin, float luxVal, int hour) {
-  dailyLuxVals[pin][hour] = luxVal;
+float addLuxtoAverage(int sensorNum, float luxVal) {
+  dailyLuxVals[sensorNum][hour] = luxVal;
 }
 
 //GET KEY VALUES FUNCTIONS
 
 int getSensorVal(int pin) {
-  analogRead(pin);
+  int sensorVal = analogRead(pin);
+  return sensorVal;
 }
 
-float getDLI(int pin) {
-  return ppfdToDLI(avgLuxToPPFD(getLuxAverage(pin))); //is this a cool thing to do with arduino? #notpython
+float getDLI(int sensorNum) {
+  return ppfdToDLI(avgLuxToPPFD(getLuxAverage(sensorNum))); //is this a cool thing to do with arduino? #notpython
 }
 
-int i;
 float sum;
-
-float getLuxAverage(int pin) {
+float getLuxAverage(int sensorNum) {
   sum = 0;
-  for (i = 0; i < 24; i = i + 1) {
-    sum += dailyLuxVals[pin][i];
+  float numVals = 24.0;
+  for (int i = 0; i < 24; i++) {
+    int dailyLightVal = dailyLuxVals[sensorNum][i];
+    sum += dailyLightVal;
   }
-  return sum/24;
+  
+  return ((float)sum)/numVals;
 }
 
 //CONVERSION FUNCTIONS
 
 float sensorToLux(int sensorVal) {
-  return a*pow(sensorVal,4) + b*pow(sensorVal,3) + c*pow(sensorVal,2) + d*sensorVal + e;
+  return a*pow(sensorVal,6) + b*pow(sensorVal,5) + c*pow(sensorVal,4) + d*pow(sensorVal, 3) + e*pow(sensorVal, 2) + f*pow(sensorVal, 1) + g;
 }
 
 float avgLuxToPPFD(float luxVal) {
@@ -199,4 +184,5 @@ float avgLuxToPPFD(float luxVal) {
 float ppfdToDLI(float ppfdVal) {
   return ppfdVal * dliConversionConstant;
 }
+
 
