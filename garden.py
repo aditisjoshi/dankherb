@@ -21,7 +21,7 @@ class Garden(object):
 
     def collect_data(self):
         # setting up serial port
-        ser = serial.Serial('/dev/cu.usbmodemFA131', 9600,timeout=5)  # open serial port
+        ser = serial.Serial('/dev/cu.usbmodemFD121', 9600,timeout=5)  # open serial port
         #time.sleep(2)
 
         print("connected to: " + ser.portstr)
@@ -41,7 +41,7 @@ class Garden(object):
             # print ser.readline()
             data.append(ser.readline())
 
-            if (len(data) == 10):
+            if (len(data) == 1):
                 datacollection = False
             else:
                 pass
@@ -50,7 +50,8 @@ class Garden(object):
         for datum in data:
             data_list = datum.split("/")
             data_list[-1].rstrip()
-            #print data_list
+            # data_list.pop(0)
+            print data_list
 
         for i,datum in enumerate(data_list):
             plant_no = i / 2
