@@ -30,15 +30,14 @@ int lightSensorVal2;
 int lightSensorVal3;
 int lightSensorVal4;
 
-int pumpOffSpeed = 0;
-int pumpOnSpeed = 180;
+int pumpOnSpeed = 200;
 
 void setup() {
   Wire.begin(8);
   Wire.onReceive(receiveEvent);
   Serial.begin(9600);
   AFMS.begin(); 
-  pump->setSpeed(200);
+  pump->setSpeed(pumpOnSpeed);
   pump->run(FORWARD);
   // turn on motor
   pump->run(RELEASE);
@@ -92,21 +91,21 @@ void readSoilSensorVals() {
 }
 
 //PUMP CONTROL
-void runPump() {
-  // Set the speed to start, from 0 (off) to 255 (max speed)
-  pump->setSpeed(pumpOnSpeed);
-  pump->run(FORWARD);
-  // turn on motor
-  pump->run(RELEASE);
-}
-
-void offPump() {
-  // Set the speed to start, from 0 (off) to 255 (max speed)
-  pump->setSpeed(pumpOffSpeed);
-  pump->run(FORWARD);
-  // turn on motor
-  pump->run(RELEASE);
-}
+//void runPump() {
+//  // Set the speed to start, from 0 (off) to 255 (max speed)
+//  pump->setSpeed(pumpOnSpeed);
+//  pump->run(FORWARD);
+//  // turn on motor
+//  pump->run(RELEASE);
+//}
+//
+//void offPump() {
+//  // Set the speed to start, from 0 (off) to 255 (max speed)
+//  pump->setSpeed(pumpOffSpeed);
+//  pump->run(FORWARD);
+//  // turn on motor
+//  pump->run(RELEASE);
+//}
 
 // PRINT TO SEND TO PYTHON GUI
 void printSoilVals() {
