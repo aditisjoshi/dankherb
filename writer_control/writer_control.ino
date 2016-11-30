@@ -19,10 +19,12 @@ int lightSensorPin3 = A2;
 int lightSensorVal4;
 int lightSensorPin4 = A3;
 
-int num1 = N_LEDS / 4;
-int num2 = (2 * N_LEDS) / 4;
-int num3 = (3 * N_LEDS) / 4;
-int num4 = (4 * N_LEDS) / 4;
+int numLights[5];
+numLights[0] = 0
+numLights[1] = N_LEDS / 4;
+numLights[2] = (2 * N_LEDS) / 4;
+numLights[3] = (3 * N_LEDS) / 4;
+numLights[4] = (4 * N_LEDS) / 4;
 
 //sensor val to lux calibration values
 const float a = -6.04174634356*pow(10,-14);
@@ -45,6 +47,7 @@ int tStartHour;
 int tCurrent;
 const int oneHour = 3.6 * pow(10, 6); //one hour in milliseconds
 int currentLuxVal;
+
 float currentDLI1;
 float currentDLI2;
 float currentDLI3;
@@ -72,6 +75,8 @@ void loop() {
   sendDatatoReceiver();
 }
 
+//writer functions
+
 void sendDatatoReceiver() {
   Wire.beginTransmission(8);
   Wire.write("a");
@@ -87,30 +92,18 @@ void sendDatatoReceiver() {
   delay(100);
 }
 
-void updateLights() {
-  if (updateTime()) { //returns true if an hour has passed, false if not
-    updateDailyLightValues(0, lightSensorPin1);
-    updateDailyLightValues(1, lightSensorPin2);
-    updateDailyLightValues(2, lightSensorPin3);
-    updateDailyLightValues(3, lightSensorPin4);
-  }
-}
+//CONTROL THE LIGHTS FUNCTIONS
 
 void controlLights() {
-  currentDLI1 = getDLI(0);
-//  currentDLI2 = getDLI(2);
-//  currentDLI3 = getDLI(3);
-//  currentDLI4 = getDLI(4);
-  
-  if (minDLI < currentDLI1 && currentDLI1 < maxDLI) {
-    //update the lights somehow!
-    chase(strip.Color(255, 255, 255), 0, num1); // Red
-  } else {
-    chase(strip.Color(0, 0, 0),0, num1);
+  for (int lightNum=0; i<4; i++) {
+    currentDLI = getDLI(lightNum);
+    if (minDLI < currentDLI && currentDLI < maxDLI) {
+      chase(strip.Color(255, 255, 255), numLights[lightNum], numLights[LightNum+1]); // Red
+    } else {
+      chase(strip.Color(0, 0, 0), numLights[lightNum], numLights[lightNum+1]);
+    }
   }
 }
-
-//CONTROL THE LIGHTS FUNCTIONS
 
 static void chase(uint32_t c, int numstart, int numend) {
   for(uint16_t i=numstart; i<numend; i++) {
@@ -120,6 +113,16 @@ static void chase(uint32_t c, int numstart, int numend) {
 } 
 
 //UPDATE FUNCTIONS
+
+void updateLights() {
+  if (updateTime()) { //returns true if an hour has passed, false if not
+    updateDailyLightValues(0, lightSensorPin1);
+    updateDailyLightValues(1, lightSensorPin2);
+    updateDailyLightValues(2, lightSensorPin3);
+    updateDailyLightValues(3, lightSensorPin4);
+  }
+}
+
 boolean updateTime() {
   //returns true if an hour has passed, false if not
   
