@@ -6,7 +6,7 @@
 Adafruit_MotorShield AFMS = Adafruit_MotorShield(); 
 
 // Creating the pump as a "motor"
-Adafruit_DCMotor *pump = AFMS.getMotor(4);
+Adafruit_DCMotor *pump = AFMS.getMotor(1);
 
 bool is_int = false; //stands for int
 
@@ -31,25 +31,29 @@ int lightSensorVal3;
 int lightSensorVal4;
 
 int pumpOffSpeed = 0;
-int pumpOnSpeed = 100;
+int pumpOnSpeed = 180;
 
 void setup() {
   Wire.begin(8);
   Wire.onReceive(receiveEvent);
   Serial.begin(9600);
   AFMS.begin(); 
-  offPump();
+  pump->setSpeed(200);
+  pump->run(FORWARD);
+  // turn on motor
+  pump->run(RELEASE);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   readSoilSensorVals();
+  //pump->run(FORWARD);
 
   //if average soil level is less than 800, turn the water on
   if ((soilSensorVal1 + soilSensorVal2 + soilSensorVal3 + soilSensorVal4)/4 < 800) {
-    runPump();
+    pump->run(FORWARD);
   } else {
-    offPump();
+    pump->run(RELEASE);
   }
 
   printSoilVals();
