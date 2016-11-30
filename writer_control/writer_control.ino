@@ -127,7 +127,6 @@ boolean updateTime() {
   //returns true if an hour has passed, false if not
   
   tCurrent = millis();
- 
   //if an hour has passed
   if ((tCurrent - tStartHour) >= 500) { 
     //update the start of the hour

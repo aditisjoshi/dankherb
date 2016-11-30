@@ -5,7 +5,7 @@
 // Create the motor shield object with the default I2C address
 Adafruit_MotorShield AFMS = Adafruit_MotorShield(); 
 
-// Creating the two motors
+// Creating the pump as a "motor"
 Adafruit_DCMotor *pump = AFMS.getMotor(4);
 
 bool is_int = false; //stands for int
@@ -44,7 +44,8 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   readSoilSensorVals();
-  
+
+  //if average soil level is less than 800, turn the water on
   if ((soilSensorVal1 + soilSensorVal2 + soilSensorVal3 + soilSensorVal4)/4 < 800) {
     runPump();
   } else {
@@ -54,6 +55,7 @@ void loop() {
   printSoilVals();
 }
 
+//RECEIVER FUNCTION
 void receiveEvent(int howMany) {
   while(Wire.available()) {
     if (Wire.available()%2 == 1) { 
@@ -85,6 +87,7 @@ void readSoilSensorVals() {
 
 }
 
+//PUMP CONTROL
 void runPump() {
   // Set the speed to start, from 0 (off) to 255 (max speed)
   pump->setSpeed(pumpOnSpeed);
@@ -101,6 +104,7 @@ void offPump() {
   pump->run(RELEASE);
 }
 
+// PRINT TO SEND TO PYTHON GUI
 void printSoilVals() {
   Serial.print(lightSensorVal1);
   Serial.print("/");
