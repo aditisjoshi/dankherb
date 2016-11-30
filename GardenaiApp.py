@@ -10,6 +10,8 @@ from kivy.uix.widget import Widget
 from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
 from kivy.properties import NumericProperty, ReferenceListProperty, ObjectProperty
+from kivy.uix.textinput import TextInput
+
 
 
 from garden import Garden
@@ -35,6 +37,7 @@ class GardenaiGame(Widget):
 class GardenaiApp(App):
 
     def build(self):
+        textinput = TextInput(text='Hello world')
         return GardenaiGame()
 
 
