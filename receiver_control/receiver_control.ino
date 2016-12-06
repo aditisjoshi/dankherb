@@ -17,13 +17,13 @@ int soilSensorVal1;
 int soilSensorPin1 = A0;
 
 int soilSensorVal2;
-int soilSensorPin2 = A1;
+int soilSensorPin2 = A0;
 
 int soilSensorVal3;
-int soilSensorPin3 = A2;
+int soilSensorPin3 = A0;
 
 int soilSensorVal4;
-int soilSensorPin4 = A3;
+int soilSensorPin4 = A0;
 
 int lightSensorVal1;
 int lightSensorVal2;
@@ -49,7 +49,7 @@ void loop() {
   //pump->run(FORWARD);
 
   //if average soil level is less than 800, turn the water on
-  if ((soilSensorVal1 + soilSensorVal2 + soilSensorVal3 + soilSensorVal4)/4 < 800) {
+  if ((soilSensorVal1 + soilSensorVal2 + soilSensorVal3 + soilSensorVal4)/4 < 700) {
     pump->run(FORWARD);
   } else {
     pump->run(RELEASE);
