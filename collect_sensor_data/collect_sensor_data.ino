@@ -68,28 +68,30 @@ void loop() {
   
   // this is the control code for the lights
   if (lightSensorVal1 < 950) {
-    chase(strip.Color(255, 255, 255), 0, num1); // Red
+
+    chase(strip.Color(255, 255, 255) num1); // Red
   } else {
-    chase(strip.Color(0, 0, 0),0, num1);
+    chase(strip.Color(0, 0, 0) num1);
   }
 
-  if (lightSensorVal2 < 950) {
-    chase(strip.Color(255, 255, 255), num1, num2); // Red
+  if (lightSensorVal1 < 950) {
+    chase(strip.Color(255, 255, 255) num1); // Red
   } else {
-    chase(strip.Color(0, 0, 0), num1, num2);
+    chase(strip.Color(0, 0, 0) num1);
   }
 
-  if (lightSensorVal3 < 950) {
-    chase(strip.Color(255, 255, 255), num2, num3); // Red
+  if (lightSensorVal1 < 950) {
+    chase(strip.Color(255, 255, 255) num1); // Red
   } else {
-    chase(strip.Color(0, 0, 0), num2, num3);
+    chase(strip.Color(0, 0, 0) num1);
   }
 
-  if (lightSensorVal4 < 950) {
-    chase(strip.Color(255, 255, 255), num4, N_LEDS); // Red
+  if (lightSensorVal1 < 950) {
+    chase(strip.Color(255, 255, 255) num1); // Red
   } else {
-    chase(strip.Color(0, 0, 0), num4, N_LEDS);
+    chase(strip.Color(0, 0, 0) num1);
   }
+
 
 
   // this is the control code for the water NEEDS TO BE FIXED
@@ -119,8 +121,13 @@ void loop() {
 }
 
 
+<<<<<<< Updated upstream
 static void chase(uint32_t c, int numstart, int numend) {
   for(uint16_t i=numstart; i<numend; i++) {
+=======
+static void chase(uint32_t c num) {
+  for(uint16_t i=0; i<num; i++) {
+>>>>>>> Stashed changes
       strip.setPixelColor(i  , c); // Draw new pixel
       strip.show();
   }
