@@ -1,4 +1,12 @@
 #include <Wire.h>
+#include <Adafruit_MotorShield.h>
+#include "utility/Adafruit_MS_PWMServoDriver.h"
+
+// Create the motor shield object with the default I2C address
+Adafruit_MotorShield AFMS = Adafruit_MotorShield(); 
+
+// Creating the pump as a "motor"
+Adafruit_DCMotor *pump = AFMS.getMotor(1);
 
 bool is_int = false; //stands for int
 
@@ -22,49 +30,35 @@ int lightSensorVal2;
 int lightSensorVal3;
 int lightSensorVal4;
 
-int pumpPin = 8;
+int pumpOnSpeed = 200;
 
 void setup() {
-  // put your setup code here, to run once:
   Wire.begin(8);
   Wire.onReceive(receiveEvent);
   Serial.begin(9600);
+  AFMS.begin(); 
+  pump->setSpeed(pumpOnSpeed);
+  pump->run(FORWARD);
+  // turn on motor
+  pump->run(RELEASE);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  soilSensorVal1 = analogRead(soilSensorPin1);
-  soilSensorVal2 = analogRead(soilSensorPin1);
-  soilSensorVal3 = analogRead(soilSensorPin1);
-  soilSensorVal4 = analogRead(soilSensorPin1);
+  readSoilSensorVals();
+  //pump->run(FORWARD);
 
+  //if average soil level is less than 800, turn the water on
   if ((soilSensorVal1 + soilSensorVal2 + soilSensorVal3 + soilSensorVal4)/4 < 800) {
-    digitalWrite(pumpPin, HIGH);   // sets the LED on
+    pump->run(FORWARD);
   } else {
-    digitalWrite(pumpPin, LOW);   // sets the LED on
+    pump->run(RELEASE);
   }
 
-  
-  Serial.println("START");
-  Serial.print("LIGHT");
-  Serial.print(lightSensorVal1);
-  Serial.print("SOIL");
-  Serial.println(soilSensorVal1);
-  Serial.print("/");
-  Serial.print(lightSensorVal2);
-  Serial.print("/");
-  Serial.println(soilSensorVal2);
-  Serial.print("/");
-  Serial.print(lightSensorVal3);
-  Serial.print("/");
-  Serial.println(soilSensorVal3);
-  Serial.print("/");
-  Serial.print(lightSensorVal4);
-  Serial.print("/");
-  Serial.println(soilSensorVal4);
-  Serial.println("END");
+  printSoilVals();
 }
 
+//RECEIVER FUNCTION
 void receiveEvent(int howMany) {
   while(Wire.available()) {
     if (Wire.available()%2 == 1) { 
@@ -88,5 +82,48 @@ void receiveEvent(int howMany) {
   }
 }
 
+void readSoilSensorVals() {
+  soilSensorVal1 = analogRead(soilSensorPin1);
+  soilSensorVal2 = analogRead(soilSensorPin2);
+  soilSensorVal3 = analogRead(soilSensorPin3);
+  soilSensorVal4 = analogRead(soilSensorPin4);
+
+}
+
+//PUMP CONTROL
+//void runPump() {
+//  // Set the speed to start, from 0 (off) to 255 (max speed)
+//  pump->setSpeed(pumpOnSpeed);
+//  pump->run(FORWARD);
+//  // turn on motor
+//  pump->run(RELEASE);
+//}
+//
+//void offPump() {
+//  // Set the speed to start, from 0 (off) to 255 (max speed)
+//  pump->setSpeed(pumpOffSpeed);
+//  pump->run(FORWARD);
+//  // turn on motor
+//  pump->run(RELEASE);
+//}
+
+// PRINT TO SEND TO PYTHON GUI
+void printSoilVals() {
+  Serial.print(lightSensorVal1);
+  Serial.print("/");
+  Serial.print(soilSensorVal1);
+  Serial.print("/");
+  Serial.print(lightSensorVal2);
+  Serial.print("/");
+  Serial.print(soilSensorVal2);
+  Serial.print("/");
+  Serial.print(lightSensorVal3);
+  Serial.print("/");
+  Serial.print(soilSensorVal3);
+  Serial.print("/");
+  Serial.print(lightSensorVal4);
+  Serial.print("/");
+  Serial.println(soilSensorVal4);
+}
 
 
