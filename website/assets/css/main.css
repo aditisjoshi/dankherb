@@ -2962,11 +2962,11 @@
 		}
 
 			.wrapper.style5 strong, .wrapper.style5 b {
-				color: #ccd1cf;
+				color: #6f6f6f;
 			}
 
 			.wrapper.style5 h2, .wrapper.style5 h3, .wrapper.style5 h4, .wrapper.style5 h5, .wrapper.style5 h6 {
-				color: #ccd1cf;
+				color: #6f6f6f;
 			}
 			.wrapper.style5 h5.name {
 				color: #6f6f6f;
@@ -2996,7 +2996,7 @@
 			}
 
 			.wrapper.style5 label {
-				color: #ccd1cf;
+				color: #6f6f6f;
 			}
 
 			.wrapper.style5 input[type="text"],
@@ -3064,7 +3064,7 @@
 				}
 
 			.wrapper.style5 table th {
-				color: #ccd1cf;
+				color: #6f6f6f;
 			}
 
 			.wrapper.style5 table thead {
@@ -3085,7 +3085,7 @@
 			.wrapper.style5 button,
 			.wrapper.style5 .button {
 				box-shadow: inset 0 0 0 2px #dfdfdf;
-				color: #ccd1cf;
+				color: #6f6f6f;
 			}
 
 				.wrapper.style5 input[type="submit"]:hover,

@@ -1,0 +1,95 @@
+
+DATA TO CALIBRATE
+
+flash light
+lux 164 7 
+fc 118 
+sen 884
+
+poe lab 
+lux 624
+fc 58
+sen 859
+
+window #2
+lux 211
+fc19.5
+sen 745
+
+window overcast
+lux 210
+fc 19.3
+sen 744
+
+under table
+lux 98
+fc 9.2
+sen 678
+
+hall
+lux 43
+fc 4
+sen 525
+
+hallway shade
+lux 43
+fc 3.6
+sen 483
+
+poe lab dark
+lux 6
+fc 0.4
+sen 167
+
+
+box over
+lux 0
+fc 0
+sen 34
+
+TEST CALIBRATION DATA
+
+low light setting
+lux 395
+fc 36.7
+sen 811
+
+second light setting
+lux 508
+fc 48
+sen 843
+
+highest light setting
+lux 678
+fc 61
+sen 866
+
+printer room
+lux 20
+fc 1.9
+sen 368
+
+hall #2
+lux 54 
+fc 5
+sen 568
+
+3rd floor dance floor
+lux 2444
+fc 227
+sen 942
+
+hall #3
+lux 213
+fc 19.8
+sen 557
+
+hal #4
+lux 422
+fc 39.2
+sen 813
+
+hall #5
+lux 305
+fc 28.3
+sen 701

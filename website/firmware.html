@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<!--
+	Spectral by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Firmware</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">Gardenai</a></h1>
+						<nav id="nav">
+							<ul>
+								<li class="special">
+									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+									<div id="menu">
+										<ul>
+											<li><a href="index.html">Home</a></li>
+											<li><a href="final.html">Final Product</a></li>
+											<li><a href="mechanical.html">Mechanical</a></li>
+											<li><a href="electrical.html">Electrical</a></li>
+											<li><a href="firmware.html">Firmware</a></li>
+											<li><a href="software.html">Software</a></li>
+											<li><a href="about.html">About Us</a></li>
+											<li><a href="financial.html">Financial</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Main -->
+					<article id="main">
+						<header class="firmware">
+							<h2>Firmware</h2>
+						</header>
+						<section class="wrapper style5">
+							<div class="inner">
+
+								<h3>Arduino Control</h3>
+								
+								<p> We controlled our system using an Arduino Uno R3 microcontroller and code written in Arduino-C. The microcontroller was connected to an AdaFruit motor shield because the current drawn by our individually addressable LEDs was enough to ruin the microcontroller. </p>
+
+								<p> Through the motor controller, we connected our sensors to analog pins, which we ran as input. The program took the sensor input and evaluated how the system, the lights and irrigation system, should respond given the input. </p>
+
+								<h5> Water Control </h5>
+
+								<p>We then ran a digital pin as an output to control the water pump. When the moisture was at a low enough threshold, we set the digital pin to HIGH to send voltage to the pump. </p>
+
+
+								<h5> Light Control </h5>
+								<p> To control the lights (individually addressable LEDS), we used the Adafruit Neopixel library. The following line creates the object that will control the lights: </p>
+
+
+								<pre> <code>Adafruit_NeoPixel strip = Adafruit_NeoPixel(N_LEDS, PIN, NEO_GRB + NEO_KHZ800); </code></pre>
+
+
+								<p> The first parameter is the number of LEDS in the strip. The second parameter denotes the analog pin to which the LED strip has been attached. The final parameter describes the type of neopixels that are being controlled. </p>
+
+
+								<p> The lights respond to data from the light sensors on the different plants. When any sensor value gets too low, the LEDs closest to the corresponding plant are turned on. We use full white light because that provides all different colors of the spectrum to the plants, fulfilling their needs. </p>
+
+
+								<p> The lights are controlled by this code:</p>
+
+								<pre> <code>strip.setPixelColor(i  , c); // Draw new pixel
+strip.show(); </code></pre>
+								
+								<p> The first line sets the color of the LED at a particular index on the strip, and the second has the light display the color.</p>
+
+							</div>
+						</section>
+					</article>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="icons">
+							<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+						</ul>
+						<ul class="copyright">
+							<li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						</ul>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
