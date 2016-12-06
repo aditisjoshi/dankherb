@@ -11,20 +11,20 @@ int lightSensorVal1;
 int lightSensorPin1 = A0;
 
 int lightSensorVal2;
-int lightSensorPin2 = A1;
+int lightSensorPin2 = A0;
 
 int lightSensorVal3;
-int lightSensorPin3 = A2;
+int lightSensorPin3 = A0;
 //
 int lightSensorVal4;
-int lightSensorPin4 = A3;
+int lightSensorPin4 = A0;
 
-int numLights[5];
-numLights[0] = 0
-numLights[1] = N_LEDS / 4;
-numLights[2] = (2 * N_LEDS) / 4;
-numLights[3] = (3 * N_LEDS) / 4;
-numLights[4] = (4 * N_LEDS) / 4;
+int numLights[4];
+int numLights[0] = 0;
+int numLights[1] = N_LEDS / 4;
+int numLights[2] = (2 * N_LEDS) / 4;
+int numLights[3] = (3 * N_LEDS) / 4;
+int numLights[4] = (4 * N_LEDS) / 4;
 
 //sensor val to lux calibration values
 const float a = -6.04174634356*pow(10,-14);
