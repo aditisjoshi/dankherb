@@ -21,6 +21,7 @@ int lightSensorPin4 = A3;
 
 int numLights[] = {0 ,N_LEDS / 4,(2 * N_LEDS) / 4, (3 * N_LEDS) / 4,  (4 * N_LEDS) / 4};
 
+
 //sensor val to lux calibration values
 const float a = -6.04174634356*pow(10,-14);
 const float b = 1.73210693561*pow(10,-10);
