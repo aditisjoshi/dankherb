@@ -19,13 +19,13 @@ The code is programmed using Python 2.7. Use the instructions [here](https://www
 You can use `$pip install kivy` to download this package. 
 
 ##### A Note About Pygame
-You can use `$pip install pygame` to download this package. 
+Kivy depends on Pygame, so if you do not have it, you can use `$pip install pygame` to download this package. 
 
 #### Serial
 You can use `$pip install pyserial` to download this package. 
 
 ### To Run
-In order to run the GUI, you must first run the Arduino code and then move over to python and run GardenaiApp.py. A window should appear that should give you information about the plants and their status. You can close the app when you are done with it.
+In order to run the GUI, you must first run the Arduino code (reciever_control.ino) and then move over to python and run GardenaiApp.py. A window should appear that should give you information about the plants and their status. You can close the app when you are done with it.
 
 #### A note about the serial name
 You will need to change the name on the serial name depending on what your Arduino program names it. You should go to line 23 in the garden.py code and change the following line `ser = serial.Serial('/dev/cu.usbmodemFA131', 9600,timeout=5)` to whatever usbmodem name your Arduino has. 
@@ -38,5 +38,6 @@ The reciever code can be found in reciever_control.ino. This code controls every
 This code also recieves control from the writer and then prints the 8 different sensor values (the 4 soil sensors and the 4 light sensors) to the serial monitor which the Python GUI code then reads to give the user the information.
 
 ### Writer
-The writer code can be found in writer_control.ino. This code controls everything for the light part of the system. The lights that we are using are individually adressable leds from Adafruit Neopixels. In order to control these we use the the Neopixel library. We are using DLI to control the lights. The code reads the light values from the four sensors in analog inputs 0-3. 
+The writer code can be found in writer_control.ino. This code controls everything for the light part of the system. The lights that we are using are individually adressable leds from Adafruit Neopixels. In order to control these we use the the Neopixel library. We are using DLI to control the lights. The code reads the light values from the four sensors in analog inputs 0-3. They take a running average of one sensor values and if that average is below the DLI threshold for that plant, the lights addressed to that plan turn on. 
+This code also writes code to the reciever using the Wire library. 
 
