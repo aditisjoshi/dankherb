@@ -11,13 +11,13 @@ int lightSensorVal1;
 int lightSensorPin1 = A0;
 
 int lightSensorVal2;
-int lightSensorPin2 = A0;
+int lightSensorPin2 = A1;
 
 int lightSensorVal3;
-int lightSensorPin3 = A1;
+int lightSensorPin3 = A2;
 //
 int lightSensorVal4;
-int lightSensorPin4 = A1;
+int lightSensorPin4 = A3;
 
 int numLights[] = {0 ,N_LEDS / 4,(2 * N_LEDS) / 4, (3 * N_LEDS) / 4,  (4 * N_LEDS) / 4};
 
