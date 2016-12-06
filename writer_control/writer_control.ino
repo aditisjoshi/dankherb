@@ -2,7 +2,7 @@
 #include <Adafruit_NeoPixel.h>
 
 #define PIN     10
-#define N_LEDS  10
+#define N_LEDS  20
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(N_LEDS, PIN, NEO_GRB + NEO_KHZ800);
 
@@ -14,17 +14,13 @@ int lightSensorVal2;
 int lightSensorPin2 = A0;
 
 int lightSensorVal3;
-int lightSensorPin3 = A0;
+int lightSensorPin3 = A1;
 //
 int lightSensorVal4;
-int lightSensorPin4 = A0;
+int lightSensorPin4 = A1;
 
-int numLights[4];
-int numLights[0] = 0;
-int numLights[1] = N_LEDS / 4;
-int numLights[2] = (2 * N_LEDS) / 4;
-int numLights[3] = (3 * N_LEDS) / 4;
-int numLights[4] = (4 * N_LEDS) / 4;
+int numLights[] = {0 ,N_LEDS / 4,(2 * N_LEDS) / 4, (3 * N_LEDS) / 4,  (4 * N_LEDS) / 4};
+
 
 //sensor val to lux calibration values
 const float a = -6.04174634356*pow(10,-14);
@@ -48,13 +44,14 @@ int tCurrent;
 const int oneHour = 3.6 * pow(10, 6); //one hour in milliseconds
 int currentLuxVal;
 
-float currentDLI1;
-float currentDLI2;
-float currentDLI3;
-float currentDLI4;
+float currentDLI;
 
-const int minDLI = 12;
-const int maxDLI = 16;
+//const int minDLI = 12;
+//const int maxDLI = 16;
+
+
+const int minDLI = 2;
+const int maxDLI = 3;
 
 void setup() {
   // put your setup code here, to run once:
@@ -95,12 +92,13 @@ void sendDatatoReceiver() {
 //CONTROL THE LIGHTS FUNCTIONS
 
 void controlLights() {
-  for (int lightNum=0; i<4; i++) {
+//  chase(strip.Color(255, 255, 255), numLights[0], numLights[0]);
+  for (int lightNum=0; lightNum<4; lightNum++) {
     currentDLI = getDLI(lightNum);
     if (minDLI < currentDLI && currentDLI < maxDLI) {
-      chase(strip.Color(255, 255, 255), numLights[lightNum], numLights[LightNum+1]); // Red
-    } else {
       chase(strip.Color(0, 0, 0), numLights[lightNum], numLights[lightNum+1]);
+    } else {
+      chase(strip.Color(255, 255, 255), numLights[lightNum], numLights[lightNum+1]); // Red
     }
   }
 }
@@ -186,5 +184,6 @@ float avgLuxToPPFD(float luxVal) {
 float ppfdToDLI(float ppfdVal) {
   return ppfdVal * dliConversionConstant;
 }
+
 
 
