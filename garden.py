@@ -60,11 +60,6 @@ class Garden(object):
             else:
                 self.plants[plant_no].soil_vals.append(int(datum))
 
-            # light_vals1.append(int(data_list[0]))
-            # soil_vals1.append(int(data_list[1]))
-            
-            # light_vals2.append(int(data_list[2]))
-            # soil_vals2.append(int(data_list[3]))
 
         for plant in self.plants:
             plant.get_soil_state()
