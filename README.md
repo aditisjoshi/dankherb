@@ -2,7 +2,7 @@
 ### PoE project Fall 2016
 December 6th, 2016
 
-The following is the github repo for our final project for principles of engineering class Fall 2016 at Olin College of Engineering. Our project is an autonomous herb garden that takes care of your plants for you using a drip irrigation system and autonomous LED lighting system. The following is a readme for the github for the project. 
+The following is the github repo for our final project for Principles of Engineering class Fall 2016 at Olin College of Engineering. Our project is an autonomous herb garden that takes care of your plants for you using a drip irrigation system and autonomous LED lighting system. The following are instructions for how to setup to use the project. 
 
 ## website
 The folder for the website includes the html, css, and images for the website. You can visit http://poe.olin.edu/2016/gardenai/ to see our working website in action.   
@@ -10,7 +10,7 @@ The folder for the website includes the html, css, and images for the website. Y
 ## Python Code (GUI)
 
 ### dependencies 
-The python depends on the following libraries:
+The python GUI depends on the following libraries:
 
 #### Python 
 The code is programmed using Python 2.7. Use the instructions [here](https://www.python.org/downloads/) to download it if you do not have it.
