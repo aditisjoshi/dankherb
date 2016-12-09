@@ -53,11 +53,11 @@
 
 								<h3>Arduino Control</h3>
 								
-								<p> We controlled our system using an Arduino Uno R3 microcontroller and code written in Arduino-C. The microcontroller was connected to an AdaFruit motor shield because the current drawn by our individually addressable LEDs was enough to ruin the microcontroller. </p>
+								<p> We controlled our system using an Arduino Uno R3 microcontroller and code written in Arduino-C. The microcontroller was connected to an AdaFruit motor shield because of the amount of current drawn by our individually addressable LEDs. (The current from the LEDs is enough to blow out an arduino, or more. Don't make our mistakes.) </p>
 
 								<p> Through the motor controller, we connected our sensors to analog pins, which we ran as input. The program took the sensor input and evaluated how the system, the lights and irrigation system, should respond given the input. </p>
 
-								<p> Because we had 8 sensor pins, we needed more analog inputs than just one Arduino Uno could offer us. We decided to use the <<a href="https://www.arduino.cc/en/Reference/Wire">Wire library</a> from Arduino. The Wire library uses I2C communication between two Arduinos by attaching their respective A4 and A5 ports as well as ground. Lastly, the master Arduino's power is connected to the recievers Vin.</p>
+								<p> Because we had 8 sensor pins, we needed more analog inputs than just one Arduino Uno could offer us. We decided to use the <a href="https://www.arduino.cc/en/Reference/Wire">Wire library</a> from Arduino. The Wire library uses I2C communication between two Arduinos by attaching their respective A4 and A5 ports as well as ground. Lastly, the master Arduino's power is connected to the recievers Vin.</p>
 
 								<h5> Water Control and Reciever Control </h5>
 

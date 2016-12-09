@@ -50,8 +50,8 @@ float currentDLI;
 //const int maxDLI = 16;
 
 
-const int minDLI = 2;
-const int maxDLI = 3;
+const int minDLI = 1;
+const int maxDLI = 2;
 
 void setup() {
   // put your setup code here, to run once:
@@ -96,6 +96,7 @@ void controlLights() {
   for (int lightNum=0; lightNum<4; lightNum++) {
     currentDLI = getDLI(lightNum);
     if (minDLI < currentDLI && currentDLI < maxDLI) {
+      Serial.println("lights off");
       chase(strip.Color(0, 0, 0), numLights[lightNum], numLights[lightNum+1]);
     } else {
       chase(strip.Color(255, 255, 255), numLights[lightNum], numLights[lightNum+1]); // Red
@@ -152,6 +153,9 @@ float addLuxtoAverage(int sensorNum, float luxVal) {
 
 int getSensorVal(int pin) {
   int sensorVal = analogRead(pin);
+  if (pin == A1 || pin == A0) {
+    Serial.println(sensorVal);
+  }
   return sensorVal;
 }
 
