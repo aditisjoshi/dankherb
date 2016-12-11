@@ -17,9 +17,9 @@ from kivy.uix.textinput import TextInput
 from garden import Garden
 
 
+
 class GardenaiGame(Widget):
 
-    our_garden = ObjectProperty(None)
     our_garden = Garden(4,["Tom Gore", "Mary Jane", "Marvin", "December"], ["Thyme", "Cilantro", "Thyme", "Cilantro"])
 
 
