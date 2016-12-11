@@ -11,58 +11,81 @@
             size: self.width, 10
 
 
-
-            
-    Label:
-        font_size: 50  
+   
+    TextInput:
+        id: plant0name
+        font_size: 40  
+        width: root.width / 3
+        height: self.minimum_height
         center_x: root.width / 4
-        top: root.top - 10
+        top: root.top + self.minimum_height / 10 - 10
         text: root.our_garden.plants[0].name
         
-    Label:
-        font_size: 50  
+    TextInput:
+        id: plant1name
+        font_size: 40  
+        width: root.width / 3
+        height: self.minimum_height
+        top: root.top + self.minimum_height / 10 - 10
         center_x: root.width * 3 / 4
-        top: root.top - 10
         text: root.our_garden.plants[1].name
 
-    Label:
-        font_size: 50  
+    TextInput:
+        id: plant2name
+        font_size: 40  
+        width: root.width / 3
+        height: self.minimum_height
         center_x: root.width / 4
-        top: root.top / 2 - 10
+        top: root.top / 2 + self.minimum_height / 10 - 10
         text: root.our_garden.plants[2].name
         
-    Label:
-        font_size: 50  
+    TextInput:
+        id: plant3name
+        font_size: 40  
+        width: root.width / 3
+        height: self.minimum_height
+        top: root.top / 2 + self.minimum_height / 10 - 10
         center_x: root.width * 3 / 4
-        top: root.top / 2 - 10
         text: root.our_garden.plants[3].name
 
 
 
 
 
-    Label:
+    TextInput:
+        id: plant0type
         font_size: 30  
+        height: self.minimum_height
+        width: root.width / 4
         center_x: root.width / 4
-        top: root.top - 60
+        top: root.top - 1.5 * self.minimum_height 
         text: root.our_garden.plants[0].herb
         
-    Label:
+    TextInput:
+        id: plant1type
         font_size: 30  
+        height: self.minimum_height
+        width: root.width / 4
         center_x: root.width * 3 / 4
-        top: root.top - 60
+        top: root.top - 1.5 * self.minimum_height 
         text: root.our_garden.plants[1].herb
 
-    Label:
+    TextInput:
+        id: plant2type
         font_size: 30  
+        height: self.minimum_height
+        width: root.width / 4
         center_x: root.width / 4
-        top: root.top / 2 - 60
+        top: root.top / 2 - 1.5 * self.minimum_height 
         text: root.our_garden.plants[2].herb
         
-    Label:
-        font_size: 30  
+    TextInput:
+        id: plant3type
+        font_size: 30 
+        height: self.minimum_height
+        width: root.width / 4 
         center_x: root.width * 3 / 4
-        top: root.top / 2 - 60
+        top: root.top / 2 - 1.5 * self.minimum_height 
         text: root.our_garden.plants[3].herb
 
 
@@ -127,4 +150,6 @@
         text: root.our_garden.plants[3].light_status
 
 
+
+    Button: 
 
