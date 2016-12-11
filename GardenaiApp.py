@@ -39,6 +39,7 @@ class GardenaiApp(App):
 
     def build(self):
         w = GardenaiGame()
+        #w.refresh.bind(on_press = w.our_garden.collect_data())
         w.plant0name = w.our_garden.plants[0].name
         w.plant1name = w.our_garden.plants[1].name
         w.plant2name = w.our_garden.plants[2].name

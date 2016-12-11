@@ -10,6 +10,14 @@
             pos: 0, self.center_y 
             size: self.width, 10
 
+    Button:
+        id: refreshbutton
+        text: "refresh"
+        height: 30
+        width: 60
+        top: root.top
+        center_x: root.width - 30
+        on_press: root.our_garden.collect_data()
 
    
     TextInput:
