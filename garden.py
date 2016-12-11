@@ -1,4 +1,3 @@
-
 from plant import Plant
 import serial
 
@@ -9,50 +8,45 @@ class Garden(object):
         # initalizing the garden object
         self.no_plants = no_plants
         self.plants = []
-
         # dictionary of standards for the different herbs
         # [soil min, soil max, sunlight min]
         self.herbs = {"Thyme":[325,650,950], "Cilantro":[325,650,950]}
-
+        # creating plant objects
         for i in range(0,self.no_plants):
             self.plants.append(Plant(plant_names[i], plant_types[i],self.herbs.get(plant_types[i],None)))
 
 
-
+    # getting the data from arduino
     def collect_data(self):
         # setting up serial port
         ser = serial.Serial('/dev/cu.usbmodemFD121', 9600,timeout=5)  # open serial port
-        #time.sleep(2)
 
         print("connected to: " + ser.portstr)
 
+        # creating empty lists to populate later on 
         data = []
         data_list = []
-
         for i in range(0,self.no_plants):
-            # light_vals + str(i) = []
-            # soil_vals + str(i) = []
             self.plants[i].light_vals = []
             self.plants[i].soil_vals = []
 
         datacollection = True
 
         while datacollection:
-            # print ser.readline()
             data.append(ser.readline())
-
-            if (len(data) == 1):
+            # if it has collected all necessary data, it turns off reading from the serial monitor
+            if (len(data) == 10):
                 datacollection = False
             else:
                 pass
 
-
+        # spliting the different values from each other
         for datum in data:
             data_list = datum.split("/")
             data_list[-1].rstrip()
-            # data_list.pop(0)
             print data_list
 
+        # depending on when it was printed to the serial monitor, it writes the value to the appropriate plant
         for i,datum in enumerate(data_list):
             plant_no = i / 2
             if (i % 2) == 0:
@@ -60,7 +54,7 @@ class Garden(object):
             else:
                 self.plants[plant_no].soil_vals.append(int(datum))
 
-
+        # getting the states for the plants depending on what the program read from arduino
         for plant in self.plants:
             plant.get_soil_state()
             plant.get_light_state()

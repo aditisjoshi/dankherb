@@ -1,6 +1,7 @@
 #:kivy 1.0.9
 
-<GardenaiGame>:    
+<GardenaiGame>:   
+    # creating the rectagles to separate the four plants 
     canvas:
         Rectangle:
             pos: self.center_x , 0
@@ -10,6 +11,7 @@
             pos: 0, self.center_y 
             size: self.width, 10
 
+    # the refresh button 
     Button:
         id: refreshbutton
         text: "refresh"
@@ -19,7 +21,7 @@
         center_x: root.width - 30
         on_press: root.our_garden.collect_data()
 
-   
+    # the four inputs for the plant names
     TextInput:
         id: plant0name
         font_size: 40  
@@ -59,7 +61,7 @@
 
 
 
-
+    # the four text inputs for the herb names
     TextInput:
         id: plant0type
         font_size: 30  
@@ -97,7 +99,7 @@
         text: root.our_garden.plants[3].herb
 
 
-
+    # icons and values for the different plants 
     Image: 
         source: 'water.png'
         height: 30

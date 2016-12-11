@@ -17,7 +17,6 @@ from kivy.uix.textinput import TextInput
 from garden import Garden
 
 
-
 class GardenaiGame(Widget):
 
     our_garden = Garden(4,["Tom Gore", "Mary Jane", "Marvin", "December"], ["Thyme", "Cilantro", "Thyme", "Cilantro"])
@@ -38,6 +37,7 @@ class GardenaiGame(Widget):
 class GardenaiApp(App):
 
     def build(self):
+        # reading the labels and updating the values based on the GUI
         w = GardenaiGame()
         #w.refresh.bind(on_press = w.our_garden.collect_data())
         w.plant0name = w.our_garden.plants[0].name
