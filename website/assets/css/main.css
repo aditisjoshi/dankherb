@@ -2636,6 +2636,23 @@
 
 			}
 
+		.wrapper > .inner > .opener {
+			text-align: center; 
+			font-size: 1.5em; 
+			line-height: 2.5em; 
+		}
+
+
+		.wrapper > .inner > .opener > .important {
+			text-transform: uppercase; 
+			color: #6F6F7E; 
+			font-weight: 600;
+		}
+
+		ul.system-list {
+			margin-left: 10em;
+		}
+
 		.wrapper.alt {
 			padding: 0;
 		}
