@@ -54,38 +54,27 @@
 						<section class="wrapper style5">
 							<div class="inner">
 
+								<p style="text-align: center; font-size: 1.5em; line-height: 2.5em;">We controlled our system using an <strong style="text-transform: uppercase; color: #6F6F7E; font-weight: 600;">Arduino Uno R3 microcontroller</strong>.The microcontroller takes in <strong style="text-transform: uppercase; color: #6F6F7E; font-weight: 600;">sensor input</strong> and controls a series of <strong style="text-transform: uppercase; color: #6F6F7E; font-weight: 600;">individually adressable LEDs</strong> and <strong style="text-transform: uppercase; color: #6F6F7E; font-weight: 600;">a water pump</strong> based on the sensor values. </p>
+
 								<h3>Arduino Control</h3>
-								
-								<p> We controlled our system using an Arduino Uno R3 microcontroller and code written in Arduino-C. The microcontroller was connected to an AdaFruit motor shield because of the amount of current drawn by our individually addressable LEDs. (The current from the LEDs is enough to blow out an arduino, or more. Don't make our mistakes.) </p>
+						
+								<P> <span> <span class="image right" style="max-width: 30%"><img src="images/overallCircuit.jpg" alt=""/></span> The microcontroller was connected to an AdaFruit motor shield because of the amount of current drawn by our individually addressable LEDs. (The current from the LEDs is enough to blow out an arduino, or more. Don't make our mistakes.) </P>
 
 								<p> Through the motor controller, we connected our sensors to analog pins, which we ran as input. The program took the sensor input and evaluated how the system, the lights and irrigation system, should respond given the input. </p>
 
-								<p> Because we had 8 sensor pins, we needed more analog inputs than just one Arduino Uno could offer us. We decided to use the <a href="https://www.arduino.cc/en/Reference/Wire">Wire library</a> from Arduino. The Wire library uses I2C communication between two Arduinos by attaching their respective A4 and A5 ports as well as ground. Lastly, the master Arduino's power is connected to the recievers Vin.</p>
+								<p> Because we had 8 sensor pins, we needed more analog inputs than just one Arduino Uno could offer us. We used use the <a target="_blank" href="https://www.arduino.cc/en/Reference/Wire">Wire library</a> from Arduino. The Wire library uses I2C communication between two Arduinos by attaching their respective A4 and A5 ports as well as ground and connecting the master Arduino's power to the recievers Vin.</p></span>
 
 								<h5> Water Control and Reciever Control </h5>
+								<span class="image left" style="max-width: 23%"><img src="images/pump.jpg" alt=""/></span>
+								<p>The reciever code can be found in <a href="https://github.com/aditisjoshi/dankherb/blob/master/receiver_control/receiver_control.ino" target="_blank">reciever_control.ino</a>. This code controls everything for the water part of the system. It consists of an Arduino and an Adafruit motor shield. The motor shield controls the pump, using the Adafruit Motorshield library, by initalizing it as a motor. It creates the pump as a motor and if it is to turn on it sets the speed equal to 200 (this was a value calibrated from testing and would probably have to change depending on the pump used). If the average of the four sensor values is below a certain threshold, the pump turns off and the the pump/motor speed is set to 0. </p>
 
-								<p>The reciever code can be found in reciever_control.ino. This code controls everything for the water part of the system. It consists of an Arduino and an Adafruit motor shield. The motor shield controls the pump, using the Adafruit Motorshield library, by initalizing it as a motor. It creates the pump as a motor and if it is to turn on it sets the speed equal to 200 (this was a value calibrated from testing and would probably have to change depending on the pump used). The four sensors that control the pump are in analog inputs 0-3. If the average of these values is below a certain threshold, then the pump turns off and the code sets the pump/motor speed equal to 0. This code also recieves control from the writer and then prints the 8 different sensor values (the 4 soil sensors and the 4 light sensors) to the serial monitor which the Python GUI code then reads to give the user the information.</p>
-
+								<p>This code also recieves control from the writer and then prints the 8 different sensor values (the 4 soil sensors and the 4 light sensors) to the serial monitor which the <a href="software.html" target="_">Python GUI</a> code then reads to give the user the information.</p>
 
 								<h5> Light Control and Writer Control </h5>
-								<p> The writer code can be found in writer_control.ino. This code controls everything for the light part of the system. The lights that we are using are individually adressable leds from Adafruit Neopixels. In order to control these we use the the Neopixel library. We are using DLI to control the lights. The code reads the light values from the four sensors in analog inputs 0-3. They take a running average of one sensor values and if that average is below the DLI threshold for that plant, the lights addressed to that plan turn on. This code also writes code to the reciever using the Wire library. To control the lights (individually addressable LEDS), we used the Adafruit Neopixel library. The following line creates the object that will control the lights: </p>
+								<span class="image left" style="max-width: 23%"><img src="images/lights.jpg" alt=""/></span>
+								<p> The writer code can be found in <a href="https://github.com/aditisjoshi/dankherb/blob/master/writer_control/writer_control.ino" target="_blank">writer_control.ino</a>. This code controls everything for the light part of the system. The lights that we are using are individually adressable leds from Adafruit Neopixels. In order to control these we use the the <a href="https://learn.adafruit.com/adafruit-neopixel-uberguide/arduino-library" target="_">Neopixel library</a>. </p>
 
-
-								<pre> <code>Adafruit_NeoPixel strip = Adafruit_NeoPixel(N_LEDS, PIN, NEO_GRB + NEO_KHZ800); </code></pre>
-
-
-								<p> The first parameter is the number of LEDS in the strip. The second parameter denotes the analog pin to which the LED strip has been attached. The final parameter describes the type of neopixels that are being controlled. </p>
-
-
-								<p> The lights respond to data from the light sensors on the different plants. When any sensor value gets too low, the LEDs closest to the corresponding plant are turned on. We use full white light because that provides all different colors of the spectrum to the plants, fulfilling their needs. </p>
-
-
-								<p> The lights are controlled by this code:</p>
-
-								<pre> <code>strip.setPixelColor(i  , c); // Draw new pixel
-								strip.show(); </code></pre>
-								
-								<p> The first line sets the color of the LED at a particular index on the strip, and the second has the light display the color.</p>
+								<p>We use the Daily Light Integral (DLI) to measure the amount of light plants have received in a day and determine if they need more. To learn more about DLI, you can look at the resources offered <a href="resources.html" target="_blank">here</a>. The program also writes to the reciever using the Wire library. </p>
 
 							</div>
 						</section>
