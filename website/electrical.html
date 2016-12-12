@@ -55,30 +55,30 @@
 						<section class="wrapper style5">
 							<div class="inner">
 
-								<h3>Interfacing with Plants</h3>
-								<p>To provide all of the necessary information vital to the health of the plants, each plant has its own light and soil moisture sensor. All eight sensors (2 for each plant) are wired to a protoboard and powered by an Arduino. In addition to the sensors, Garden.ai uses a water pump and LED strips provide light and water to keep the plants alive. 
-								</p>
 
-								<h3>Control</h3>
+								<p style="text-align: center; font-size: 1.5em; line-height: 2.5em;">Each plant has its own <strong style="text-transform: uppercase; color: #6F6F7E; font-weight: 600;">light</strong> and <strong style="text-transform: uppercase; color: #6F6F7E; font-weight: 600;">soil moisture</strong> sensors, which are wired to a protoboard and powered by an <strong style="text-transform: uppercase; color: #6F6F7E; font-weight: 600;">Arduino</strong>. Gardenai additionally uses a separate circuit to sense the <strong style="text-transform: uppercase; color: #6F6F7E; font-weight: 600;">water level</strong> of the tank and alert the user when it is low.</p>
+
+								<br/>
+								<div class="box alt">
+									<div class="row uniform 50%">
+										<div class="6u"><h4>Arduino Circuit Schematic</h4><span class="image fit"><img src="images/overallCircuit.jpg" alt="" /></span></div>
+										<div class="6u"><h4>Water Level Sensor Circuit Diagram</h4><span class="image fit"><img src="images/waterlevelCircuit.jpg" alt="" /></span></div>
+									</div>
+								</div>
+
+								<h3>Arduino Control</h3>
 								<p>
-								<span class="image right" style="max-width: 20%"><img src="images/arduinos.jpg" alt=""/></span> To handle all of the data from the sensors and control the pump and LED’s, we are reliant on two Arduinos. Due to the large number of inputs and limited space on a single Arduino, we decided to set up two Arduinos in a leader and follower system. This enables us to only plug in one Arduino to read the GUI but takes advantage of all of the analog inputs across both Arduinos. The LED’s can be powered off of the 5V, and thusly are plugged into the Arduino. However, the pump requires 12V. To protect the Arduino controlling the pump, we use an Adafruit motor shield to shield the Arduino beneath and enable us to plug in a power brick from the wall to power the pump itself. The arduino control is described more in depth in the <a href="firmware.htmlg">firmware</a> section of the website. </p>
+								<span class="image right" style="max-width: 45%"><img src="images/arduinos.jpg" alt=""/></span> To handle all of the data from the sensors and control the pump and LED’s, we are reliant on two Arduinos. Due to the large number of inputs and limited space on a single Arduino, we decided to set up two Arduinos in a leader and follower system. This enables us to only plug in one Arduino to read the GUI but takes advantage of all of the analog inputs across both Arduinos. The LED’s can be powered off of the 5V, and thusly are plugged into the Arduino. However, the pump requires 12V. To protect the Arduino controlling the pump, we use an Adafruit motor shield to shield the Arduino beneath and enable us to plug in a power brick from the wall to power the pump itself. The arduino control is described more in depth in the <a href="firmware.htmlg">firmware</a> section of the website. </p>
 								
 								<p> Embedded in the nature, no pun intended, of this project are the dueling forces of water and electricity. To make sure the two don’t interfere with each other, the electronics were wired in such a way and the housing designed with the size of those components in mind so that they all could easily fit in a sealed acrylic box to protect it from any aquatic mishaps. </p>
 
-								<h3>Water Tank Level Control</h3>
-								<span class="image left" style="max-width: 16%"><img src="images/water_level_sensor.jpg" alt=""/></span>
+								<h3>Water Tank Level Alerts</h3>
+								<span class="image left" style="max-width: 25%"><img src="images/water_level_sensor.jpg" alt=""/></span>
 								<p>To alert the user when the water in the tank is low, we have a separate water level sensor hooked up to circuit that turns an LED off when the water is too low. 
 
 								<p> The LED is controlled by the output from an operational amplifier (op-amp) that takes as input the sensor value and outputs ~5V when the sensor input voltage is high enough and ~0V when the sensor is volate is low enough. </p>
 
 								<p>The voltage across the water level sensor goes up when the water level is higher and down as the water level detected by the sensor goes down. When the level is low enough, the voltage into the op-amp is low enough that the ouput voltage switches to the lower power rail, and the LED turns off.</p>
-
-								<div class="box alt">
-									<div class="row uniform 50%">
-										<div class="6u"><h3>Arduino Circuit Schematic</h3><span class="image fit"><img src="images/overallCircuit.jpg" alt="" /></span></div>
-										<div class="6u"><h3>Water Level Sensor Circuit Diagram</h3><span class="image fit"><img src="images/waterlevelCircuit.jpg" alt="" /></span></div>
-									</div>
-								</div>
 
 						</section>
 					</article>
