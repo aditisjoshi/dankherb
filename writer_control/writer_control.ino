@@ -1,7 +1,10 @@
+// adding in the necessary libraries
 #include <Wire.h>
 #include <Adafruit_NeoPixel.h>
 
+// chosing the pins that the lights are attached too
 #define PIN     10
+// 
 #define N_LEDS  20
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(N_LEDS, PIN, NEO_GRB + NEO_KHZ800);
@@ -9,13 +12,10 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(N_LEDS, PIN, NEO_GRB + NEO_KHZ800);
 //lights control 
 int lightSensorVal1;
 int lightSensorPin1 = A0;
-
 int lightSensorVal2;
 int lightSensorPin2 = A1;
-
 int lightSensorVal3;
 int lightSensorPin3 = A2;
-//
 int lightSensorVal4;
 int lightSensorPin4 = A3;
 
@@ -50,8 +50,8 @@ float currentDLI;
 //const int maxDLI = 16;
 
 
-const int minDLI = 1;
-const int maxDLI = 2;
+const int minDLI = 2;
+const int maxDLI = 3;
 
 void setup() {
   // put your setup code here, to run once:
@@ -96,7 +96,6 @@ void controlLights() {
   for (int lightNum=0; lightNum<4; lightNum++) {
     currentDLI = getDLI(lightNum);
     if (minDLI < currentDLI && currentDLI < maxDLI) {
-      Serial.println("lights off");
       chase(strip.Color(0, 0, 0), numLights[lightNum], numLights[lightNum+1]);
     } else {
       chase(strip.Color(255, 255, 255), numLights[lightNum], numLights[lightNum+1]); // Red
@@ -153,9 +152,6 @@ float addLuxtoAverage(int sensorNum, float luxVal) {
 
 int getSensorVal(int pin) {
   int sensorVal = analogRead(pin);
-  if (pin == A1 || pin == A0) {
-    Serial.println(sensorVal);
-  }
   return sensorVal;
 }
 
