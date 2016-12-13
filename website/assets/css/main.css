@@ -3674,10 +3674,10 @@
 
 	#main > header.final {
 		padding: 12em 0 10em 0 ;
-		background-image: -moz-linear-gradient(top, rgba(241, 187, 135,0.5), rgba(241, 187, 135,0.5)), url("../../images/banner-final.jpg");
-		background-image: -webkit-linear-gradient(top, rgba(241, 187, 135,0.5), rgba(241, 187, 135,0.5)), url("../../images/banner-final.jpg");
-		background-image: -ms-linear-gradient(top, rgba(241, 187, 135,0.5), rgba(241, 187, 135,0.5)), url("../../images/banner-final.jpg");
-		background-image: linear-gradient(top, rgba(241, 187, 135,0.5), rgba(241, 187, 135,0.5)), url("../../images/banner-final.jpg");
+		background-image: -moz-linear-gradient(top, rgba(241, 187, 135,0.5), rgba(241, 187, 135,0.5)), url("../../images/hero_image.jpg");
+		background-image: -webkit-linear-gradient(top, rgba(241, 187, 135,0.5), rgba(241, 187, 135,0.5)), url("../../images/hero_image.jpg");
+		background-image: -ms-linear-gradient(top, rgba(241, 187, 135,0.5), rgba(241, 187, 135,0.5)), url("../../images/hero_image.jpg");
+		background-image: linear-gradient(top, rgba(241, 187, 135,0.5), rgba(241, 187, 135,0.5)), url("../../images/hero_image.jpg");
 		background-attachment: fixed;
 		background-position: center center;
 		background-repeat: no-repeat;
