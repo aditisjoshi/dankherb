@@ -3685,6 +3685,19 @@
 			text-align: center;
 		}
 
+		#main > header.software {
+			padding: 12em 0 10em 0 ;
+			background-image: -moz-linear-gradient(top, rgba(241, 187, 135,0.5), rgba(241, 187, 135,0.5)), url("../../images/banner-soft.png");
+			background-image: -webkit-linear-gradient(top, rgba(241, 187, 135,0.5), rgba(241, 187, 135,0.5)), url("../../images/banner-soft.png");
+			background-image: -ms-linear-gradient(top, rgba(241, 187, 135,0.5), rgba(241, 187, 135,0.5)), url("../../images/banner-soft.png");
+			background-image: linear-gradient(top, rgba(241, 187, 135,0.5), rgba(241, 187, 135,0.5)), url("../../images/banner-soft.png");
+			background-attachment: fixed;
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: cover;
+			text-align: center;
+		}
+
 		#main > header h2 {
 			font-size: 1.75em;
 			margin: 0 0 0.5em 0;
