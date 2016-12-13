@@ -49,27 +49,64 @@
 
 				<!-- Main -->
 					<article id="main">
-						<header class="basic">
+						<header>
 							<h2>Final Product</h2>
 							<h2><span class="icon fa-cogs"><span class="label">Final Product</span></span></h2>
 						</header>
 						<section class="wrapper style5">
 							<div class="inner">
-							<section>
+								<section>
+								<div class="row ">
+									<div class="6u 12u$(medium)">
+										<h3> MVP</h3>
+										<ul>
+											<li>Autonomous watering and feedback control <span class="icon fa-check"></span></li>
+											<li>Autonomous lighting and feedback control <span class="icon fa-check"></span></li>
+											<li>Water drainage <span class="icon fa-check"></li> 
+											<li>Waterproofing and electronics protection <span class="icon fa-check"></span></li>
+										</ul>
+									</div>
+									<div class="6u$ 12u$(medium)">
+										<h3> Stretch Goal</h3>
+										<ul>
+											<li>Aesthetically pleasing mechanical design <span class="icon fa-check"></span></li>
+											<li>Realistic values for light calibration <span class="icon fa-check"></span></li>
 
-							<h3>Final System</h3>
-							<p>We created an autonomous garden system that will water and deliver light to your plants using light and soil moisture sensors. Easily take care of your plants by just filling up a water container and then just letting the system do the work for you!</p>
+										</ul>
 
-							<h4>Videos of the System</h4>
-							<p>These are videos of the different parts of the system working separately. We will be uploading a final video on Wednesday; stay tuned for an exciting update!</p>
+									</div>
+								</div>
 
-							<video id="sampleMovie" src="images/lights.mov" style="width: 25%" controls></video>
-							<video id="sampleMovie" src="images/pump.mov" style="width: 25%" controls></video>
-							<video id="sampleMovie" src="images/water.mov" style="width: 45%" controls></video>
-							<p>These videos show the lights responding to control, the pump responding to control, and an led showing the water level and when to refill the tank respectfully.</p>
-							
-							<h4>Overall System Diagram</h4>
-								<span class="image"><img  style="width: 100%" src="images/HeroImageWithCallouts.png" alt=""/>
+								<h3>How We Got Here</h3>
+								<div class="row ">
+									<div class="6u 12u$(medium)">
+										<h5>Sprint One</h5>
+										<span class="image left" style="max-width: 100%"><img src="images/sprint1.jpg" alt=""/>
+										<span><strong>Goal: </strong> One potten plant housed in a sketch model with sensors.</span> <br/><br/>
+										<span>We focused on irrigation control (with gravity, no pump) and sensing for just one plant. We wanted to get small system working with everything from the mechanical irrigation to the Python GUI. We wanted to get a first sketch model built with MDF to test that material and the viability of press fitting finger joint linkages.</span></span>
+									</div>
+									<div class="6u$ 12u$(medium)">
+										<h5>Sprint Two</h5>
+										<span class="image left" style="max-width: 100%"><img src="images/sprint2.jpg" alt="" rotate="90"/>
+										<span><strong>Goal: </strong> Integrated system responding to sensor data to control light and watering, as well as a more refined version of the GUI and website.</span> <br/><br/>
+										<span>We wanted to get closer to completing the control loop between different parts of the system we had built in Sprint 1 by having our sensor input control the lights and pump. We also wanted to refine and prototype closer to our final mechanical structure design.</span></span>
+									</div>
+								</div>
+								<div class="row ">
+									<div class="6u 12u$(medium)">
+										<h5>Sprint Three</h5>
+										<span class="image left" style="max-width: 100%"><img src="images/sprint3.jpg" alt="" rotate="90"/>
+										<span><strong>Goal: </strong> Calibrate each system and begin constructing the final form with a focus on a "wow" factor.</span> <br/><br/>
+										<span>We focused on having the pump and light control working at the same time, which meant using the Wire library. We also refined our control by making it based on real calibration using DLI. We constructed the final version of our box and worked on making waterproof electronics and drainage containers so that we would only need to test and debug during our last week. </span></span>
+									</div> 
+									<div class="6u$ 12u$(medium)" >
+										<h5>Final Week</h5>
+										<span class="image left" style="max-width: 100%"><img src="images/sprint4.jpg" alt="" rotate="90"/>
+										<span><strong>Goal: </strong> Race to the finish.</span> <br/><br/>
+										<p>We focused on putting everything together and  testing so that it would work for a long time and keep all your plants alive! We also added shades to the project and made it more aesthetically pleasing, two of our stretch goals.</caption></span>
+									</div>
+								</div>
+
 								</section>
 							</div>
 						</section>
