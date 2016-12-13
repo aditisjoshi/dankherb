@@ -3700,10 +3700,10 @@
 
 	#main > header.process {
 		padding: 12em 0 10em 0 ;
-		background-image: -moz-linear-gradient(top, rgba(241, 187, 135,0.5), rgba(241, 187, 135,0.5)), url("../../images/gallery8.jpg");
-		background-image: -webkit-linear-gradient(top, rgba(241, 187, 135,0.5), rgba(241, 187, 135,0.5)), url("../../images/gallery8.jpg");
-		background-image: -ms-linear-gradient(top, rgba(241, 187, 135,0.5), rgba(241, 187, 135,0.5)), url("../../images/gallery8.jpg");
-		background-image: linear-gradient(top, rgba(241, 187, 135,0.5), rgba(241, 187, 135,0.5)), url("../../images/gallery8.jpg");
+		background-image: -moz-linear-gradient(top, rgba(241, 187, 135,0.5), rgba(241, 187, 135,0.5)), url("../../images/banner-proc.jpg");
+		background-image: -webkit-linear-gradient(top, rgba(241, 187, 135,0.5), rgba(241, 187, 135,0.5)), url("../../images/banner-proc.jpg");
+		background-image: -ms-linear-gradient(top, rgba(241, 187, 135,0.5), rgba(241, 187, 135,0.5)), url("../../images/banner-proc.jpg");
+		background-image: linear-gradient(top, rgba(241, 187, 135,0.5), rgba(241, 187, 135,0.5)), url("../../images/banner-proc.jpg");
 		background-attachment: fixed;
 		background-position: center center;
 		background-repeat: no-repeat;
