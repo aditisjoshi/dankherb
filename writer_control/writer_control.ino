@@ -4,12 +4,12 @@
 
 // chosing the pins that the lights are attached too
 #define PIN     10
-// 
 #define N_LEDS  20
 
+
+//set up for Neopixels
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(N_LEDS, PIN, NEO_GRB + NEO_KHZ800);
 
-//lights control 
 int lightSensorVal1;
 int lightSensorPin1 = A0;
 int lightSensorVal2;
@@ -19,6 +19,7 @@ int lightSensorPin3 = A2;
 int lightSensorVal4;
 int lightSensorPin4 = A3;
 
+// these are the indices of the individually addressable LEDs that should be turned on for each light
 int numLights[] = {0 ,N_LEDS / 4,(2 * N_LEDS) / 4, (3 * N_LEDS) / 4,  (4 * N_LEDS) / 4};
 
 
@@ -44,26 +45,16 @@ int tCurrent;
 const int oneHour = 3.6 * pow(10, 6); //one hour in milliseconds
 int currentLuxVal;
 
-float currentDLI;
-
-//const int minDLI = 12;
-//const int maxDLI = 16;
-
+float currentDLI[] = {0,0,0,0};
 
 const int minDLI = 2;
-const int maxDLI = 3;
 
 void setup() {
   // put your setup code here, to run once:
   Wire.begin();
   Serial.begin(9600);
   strip.begin();
-//for (int j=0;j<24;j++) {
-//  dailyLuxVals[0][j] = 0;
-//  dailyLuxVals[1][j] = 0;
-//  dailyLuxVals[2][j] = 0;
-//  dailyLuxVals[3][j] = 0;
-//}
+  setValuestoZero();  //preset values to 0
 }
 
 void loop() {
@@ -72,18 +63,31 @@ void loop() {
   sendDatatoReceiver();
 }
 
+
+//setup functions 
+
+void setValuestoZero() {
+  for (int j=0;j<24;j++) {
+    dailyLuxVals[0][j] = 0;
+    dailyLuxVals[1][j] = 0;
+    dailyLuxVals[2][j] = 0;
+    dailyLuxVals[3][j] = 0;
+  }
+}
+
 //writer functions
 
 void sendDatatoReceiver() {
+  //sends the DLI data to the receiver, from which it is printed to the serial, where the python GUI can grab it 
   Wire.beginTransmission(8);
   Wire.write("a");
-  Wire.write(lightSensorVal1);
+  Wire.write(currentDLI[0]);
   Wire.write("b");
-  Wire.write(lightSensorVal1);
+  Wire.write(currentDLI[1]);
   Wire.write("c");
-  Wire.write(lightSensorVal1);
+  Wire.write(currentDLI[2]);
   Wire.write("d");
-  Wire.write(lightSensorVal1);
+  Wire.write(currentDLI[3]);
   Wire.endTransmission();
 
   delay(100);
@@ -92,10 +96,11 @@ void sendDatatoReceiver() {
 //CONTROL THE LIGHTS FUNCTIONS
 
 void controlLights() {
-//  chase(strip.Color(255, 255, 255), numLights[0], numLights[0]);
+  //for each light, get the current DLI, and if it is not bright enough, turn the lights on
+  
   for (int lightNum=0; lightNum<4; lightNum++) {
-    currentDLI = getDLI(lightNum);
-    if (minDLI < currentDLI && currentDLI < maxDLI) {
+    currentDLI[lightNum] = getDLI(lightNum);
+    if (minDLI < currentDLI[lightNum]) {
       chase(strip.Color(0, 0, 0), numLights[lightNum], numLights[lightNum+1]);
     } else {
       chase(strip.Color(255, 255, 255), numLights[lightNum], numLights[lightNum+1]); // Red
@@ -113,7 +118,10 @@ static void chase(uint32_t c, int numstart, int numend) {
 //UPDATE FUNCTIONS
 
 void updateLights() {
-  if (updateTime()) { //returns true if an hour has passed, false if not
+  //updateTime() returns true if an hour has passed, false if not
+  //this saves the sensor light values every hour so that the average can be calculated 
+  
+  if (updateTime()) { 
     updateDailyLightValues(0, lightSensorPin1);
     updateDailyLightValues(1, lightSensorPin2);
     updateDailyLightValues(2, lightSensorPin3);
@@ -140,6 +148,7 @@ boolean updateTime() {
 }
 
 void updateDailyLightValues(int sensorNum, int sensorPin) {
+   //gets the current light value in Lux from the value given by the sensor and adds it to the average of the day's values
   currentLuxVal = sensorToLux(getSensorVal(sensorPin));
   addLuxtoAverage(sensorNum, currentLuxVal);
 }
@@ -156,11 +165,14 @@ int getSensorVal(int pin) {
 }
 
 float getDLI(int sensorNum) {
+  //for a certain sensor (i.e. a certain plant), get the average lux from the last 12 hours and convert that to PPFD and then DLI 
+  //(see our website resources for more info on PPFD and DLI)
   return ppfdToDLI(avgLuxToPPFD(getLuxAverage(sensorNum))); //is this a cool thing to do with arduino? #notpython
 }
 
 float sum;
 float getLuxAverage(int sensorNum) {
+   //takes average of all saved lux values from the last 12 hours
   sum = 0;
   float numVals = 24.0;
   for (int i = 0; i < 24; i++) {
@@ -174,6 +186,7 @@ float getLuxAverage(int sensorNum) {
 //CONVERSION FUNCTIONS
 
 float sensorToLux(int sensorVal) {
+  //this polynomial comes from our own calibration of the sensor 
   return a*pow(sensorVal,6) + b*pow(sensorVal,5) + c*pow(sensorVal,4) + d*pow(sensorVal, 3) + e*pow(sensorVal, 2) + f*pow(sensorVal, 1) + g;
 }
 
