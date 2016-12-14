@@ -11,6 +11,7 @@ class Garden(object):
         # dictionary of standards for the different herbs
         self.herbs = {"Thyme":[325,650,2], "Cilantro":[325,650,2]}
         # creating plant objects
+        # first it reads from the file to check what the plant names are
         file = open("plant_data.txt",'r')
         plant_names = file.readline()
         plant_names = plant_names.split(",")
@@ -20,6 +21,7 @@ class Garden(object):
         file.close()
         self.plant_names = plant_names
         self.plant_types = plant_types
+        # setting the plant names to what was read from the arduino
         for i in range(0,self.no_plants):
             self.plants.append(Plant(plant_names[i], plant_types[i],self.herbs.get(plant_types[i],[400,900,2])))
 
@@ -70,15 +72,18 @@ class Garden(object):
         return
 
 
+    # changing the variable names based on what the user has inputted
     def savevariables(self,plant0name,plant1name,plant2name,plant3name,plant0type,plant1type,plant2type,plant3type):
+        # first it opens the plant file 
         open('plant_data.txt', 'w').close()
         new_names = [plant0name,plant1name,plant2name,plant3name]
         new_types = [plant0type,plant1type,plant2type,plant3type]
-
+        # then it writes the new plant names to the plant file
         file = open("plant_data.txt",'w')
         file.write(plant0name+","+plant1name+","+plant2name+","+plant3name+"\n")
         file.write(plant0type+","+plant1type+","+plant2type+","+plant3type)
 
+        # it also writes the new plant names to the plant objects themselves
         for i,plant in enumerate(self.plants):
             plant.writeplantname(new_names[i])
             plant.writeplanttype(new_types[i])
