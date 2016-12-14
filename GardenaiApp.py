@@ -20,15 +20,15 @@ class GardenaiGame(Widget):
     our_garden = Garden(4)
 
     # FOR TESTING WHEN WE ARE NOT HOOKED UP TO ARDUINO
-    for plant in our_garden.plants:
-        # this is for testing
-        plant.soil_vals = [300,400,500,600]
-        plant.light_vals = [1,2,3,2]
-        plant.get_soil_state()
-        plant.get_light_state()
+    # for plant in our_garden.plants:
+    #     # this is for testing
+    #     plant.soil_vals = [300,400,500,600]
+    #     plant.light_vals = [1,2,3,2]
+    #     plant.get_soil_state()
+    #     plant.get_light_state()
 
     # UNCOMMENT THIS LINE WHEN WE ARE HOOKED UP TO ARDUINO
-    #our_garden.collect_data()
+    our_garden.collect_data()
 
 
 class GardenaiApp(App):

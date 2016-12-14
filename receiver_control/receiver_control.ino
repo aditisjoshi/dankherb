@@ -26,7 +26,7 @@ int soilSensorVal4;
 int soilSensorPin4 = A3;
 
 // the treshold below which the pump will turn on
-int treshold = 990;
+int treshold = 600;
 
 // the speed necessary to get the pump running
 int pumpOnSpeed = 200;
@@ -53,7 +53,6 @@ void setup() {
 void loop() {
   // first, the code reads the soil sensor values from the arduino
   readSoilSensorVals();
-
   // if average soil level is less than the treshold, turn the water on
   if ((soilSensorVal1 + soilSensorVal2 + soilSensorVal3 + soilSensorVal4)/4 < treshold) {
     pump->run(FORWARD);

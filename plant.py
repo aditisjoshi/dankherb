@@ -1,7 +1,7 @@
 # this script creates a plant class for the gui
 class Plant(object):
 
-    def __init__(self, name, herb, standards=[400,900,2]):
+    def __init__(self, name, herb, standards=[325,650,.9]):
         # initalizing the plant object with a name and standards
         self.name = name
         self.herb = herb

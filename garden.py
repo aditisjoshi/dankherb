@@ -9,7 +9,7 @@ class Garden(object):
         self.no_plants = no_plants
         self.plants = []
         # dictionary of standards for the different herbs
-        self.herbs = {"Thyme":[325,650,2], "Cilantro":[325,650,2]}
+        self.herbs = {"Thyme":[325,650,.9], "Cilantro":[325,650,.9], "Rosemary":[325,650,.9],  "Sage":[325,650,.9]}
         # creating plant objects
         # first it reads from the file to check what the plant names are
         file = open("plant_data.txt",'r')

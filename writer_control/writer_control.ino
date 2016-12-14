@@ -46,7 +46,7 @@ const int oneHour = 3.6 * pow(10, 6); //one hour in milliseconds
 int currentLuxVal;
 
 float currentDLI;
-float currentDLI[4];
+float currentDLISaved[4];
 
 const float minDLI = 0.5;
 const float maxDLI = 0.9;
@@ -73,13 +73,13 @@ void sendDatatoReceiver() {
   //sends the DLI data to the receiver, from which it is printed to the serial, where the python GUI can grab it
   Wire.beginTransmission(8);
   Wire.write("a");
-  Wire.write((int)currentDLI[0]);
+  Wire.write((int)currentDLISaved[0]);
   Wire.write("b");
-  Wire.write((int)currentDLI[1]);
+  Wire.write((int)currentDLISaved[1]);
   Wire.write("c");
-  Wire.write((int)currentDLI[2]);
+  Wire.write((int)currentDLISaved[2]);
   Wire.write("d");
-  Wire.write((int)currentDLI[3]);
+  Wire.write((int)currentDLISaved[3]);
   Wire.endTransmission();
 
   delay(100);
@@ -92,10 +92,8 @@ void controlLights() {
 
   for (int lightNum = 0; lightNum < 4; lightNum++) {
     currentDLI = getDLI(lightNum);
-    currentDLI[lightNum] = currentDLI; //save this so that we can send it to the python GUI
-    Serial.println(currentDLI);
+    currentDLISaved[lightNum] = currentDLI; //save this so that we can send it to the python GUI
     if (minDLI < currentDLI && currentDLI < maxDLI) {
-      Serial.println("YAY");
       chase(strip.Color(0, 0, 0), numLights[lightNum], numLights[lightNum + 1]);
     } else {
       chase(strip.Color(255, 255, 255), numLights[lightNum], numLights[lightNum+1]); // Red
