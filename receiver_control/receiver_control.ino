@@ -7,7 +7,7 @@
 Adafruit_MotorShield AFMS = Adafruit_MotorShield(); 
 
 // Creating the pump as a "motor"
-Adafruit_DCMotor *pump = AFMS.getMotor(1);
+Adafruit_DCMotor *pump = AFMS.getMotor(3);
 
 // setting up the variables needed to read the light sensor values
 // c tells us which light sensor it is
