@@ -1,7 +1,7 @@
 # this script creates a plant class for the gui
 class Plant(object):
 
-    def __init__(self, name, herb, standards=[400,900,900]):
+    def __init__(self, name, herb, standards=[400,900,2]):
         # initalizing the plant object with a name and standards
         self.name = name
         self.herb = herb
@@ -38,3 +38,11 @@ class Plant(object):
 
         self.light_status = "The light shines brightly."
         return 
+
+    # a method to change the plant name depending on what the user inputs
+    def writeplantname(self,new_name):
+        self.name = new_name
+
+    # a method to change the plant type depending on what the user inputs
+    def writeplanttype(self,new_type):
+        self.type = new_type

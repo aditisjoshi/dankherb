@@ -1,17 +1,24 @@
 #:kivy 1.0.9
 
-<GardenaiGame>:   
-    # creating the rectagles to separate the four plants 
+<GardenaiGame>:  
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            
+
     canvas:
         Rectangle:
             pos: self.center_x , 0
             size: 10, self.height
 
+
         Rectangle:
             pos: 0, self.center_y 
             size: self.width, 10
 
-    # the refresh button 
     Button:
         id: refreshbutton
         text: "refresh"
@@ -21,7 +28,15 @@
         center_x: root.width - 30
         on_press: root.our_garden.collect_data()
 
-    # the four inputs for the plant names
+    Button:
+        id: savebutton
+        text: "save"
+        height: 30
+        width: 60
+        top: root.top - 30
+        center_x: root.width - 30
+        on_press: root.our_garden.savevariables(plant0name.text,plant1name.text,plant2name.text,plant3name.text,plant0type.text,plant1type.text,plant2type.text,plant3type.text)
+
     TextInput:
         id: plant0name
         font_size: 40  
@@ -60,8 +75,6 @@
 
 
 
-
-    # the four text inputs for the herb names
     TextInput:
         id: plant0type
         font_size: 30  
@@ -99,7 +112,6 @@
         text: root.our_garden.plants[3].herb
 
 
-    # icons and values for the different plants 
     Image: 
         source: 'water.png'
         height: 30
@@ -119,6 +131,7 @@
         font_size: 20 
         center_x: root.width / 4
         top: root.top - 125
+        color: 0.965, 0.557, 0.408,1
         text: root.our_garden.plants[0].soil_status
         
     Label:
@@ -126,6 +139,7 @@
         font_size: 20 
         center_x: root.width * 3 / 4
         top: root.top - 125
+        color: 0.965, 0.557, 0.408,1
         text: root.our_garden.plants[1].soil_status
 
     Image: 
@@ -147,6 +161,7 @@
         font_size: 20 
         center_x: root.width / 4 
         top: root.top - 175
+        color: 0.965, 0.557, 0.408,1
         text: root.our_garden.plants[0].light_status
         
     Label:
@@ -154,6 +169,7 @@
         font_size: 20 
         center_x: root.width * 3 / 4
         top: root.top - 175
+        color: 0.965, 0.557, 0.408,1 
         text: root.our_garden.plants[1].light_status
 
     Image: 
@@ -175,6 +191,7 @@
         font_size: 20 
         center_x: root.width / 4
         top: root.top /2 - 125
+        color: 0.965, 0.557, 0.408,1
         text: root.our_garden.plants[2].soil_status
         
     Label:
@@ -182,6 +199,7 @@
         font_size: 20 
         center_x: root.width * 3 / 4
         top: root.top /2 - 125
+        color: 0.965, 0.557, 0.408,1
         text: root.our_garden.plants[3].soil_status
 
     Image: 
@@ -203,6 +221,7 @@
         font_size: 20 
         center_x: root.width / 4
         top: root.top /2 - 175
+        color: 0.965, 0.557, 0.408,1 
         text: root.our_garden.plants[2].light_status
         
     Label:
@@ -210,6 +229,7 @@
         font_size: 20 
         center_x: root.width * 3 / 4
         top: root.top /2 - 175
+        color: 0.965, 0.557, 0.408,1
         text: root.our_garden.plants[3].light_status
 
 

@@ -4,16 +4,24 @@ import serial
 # this script creates a garden class for the gui
 class Garden(object):
 
-    def __init__(self, no_plants, plant_names, plant_types):
+    def __init__(self, no_plants):
         # initalizing the garden object
         self.no_plants = no_plants
         self.plants = []
         # dictionary of standards for the different herbs
-        # [soil min, soil max, sunlight min]
-        self.herbs = {"Thyme":[325,650,950], "Cilantro":[325,650,950]}
+        self.herbs = {"Thyme":[325,650,2], "Cilantro":[325,650,2]}
         # creating plant objects
+        file = open("plant_data.txt",'r')
+        plant_names = file.readline()
+        plant_names = plant_names.split(",")
+        plant_names[-1] = plant_names[-1].replace("\n","")
+        plant_types = file.readline()
+        plant_types = plant_types.split(",")
+        file.close()
+        self.plant_names = plant_names
+        self.plant_types = plant_types
         for i in range(0,self.no_plants):
-            self.plants.append(Plant(plant_names[i], plant_types[i],self.herbs.get(plant_types[i],None)))
+            self.plants.append(Plant(plant_names[i], plant_types[i],self.herbs.get(plant_types[i],[400,900,2])))
 
 
     # getting the data from arduino
@@ -60,4 +68,23 @@ class Garden(object):
             plant.get_light_state()
 
         return
+
+
+    def savevariables(self,plant0name,plant1name,plant2name,plant3name,plant0type,plant1type,plant2type,plant3type):
+        open('plant_data.txt', 'w').close()
+        new_names = [plant0name,plant1name,plant2name,plant3name]
+        new_types = [plant0type,plant1type,plant2type,plant3type]
+
+        file = open("plant_data.txt",'w')
+        file.write(plant0name+","+plant1name+","+plant2name+","+plant3name+"\n")
+        file.write(plant0type+","+plant1type+","+plant2type+","+plant3type)
+
+        for i,plant in enumerate(self.plants):
+            plant.writeplantname(new_names[i])
+            plant.writeplanttype(new_types[i])
+
+
+
+
+
 
