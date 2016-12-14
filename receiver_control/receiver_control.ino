@@ -26,7 +26,7 @@ int soilSensorVal4;
 int soilSensorPin4 = A3;
 
 // the treshold below which the pump will turn on
-int treshold = 800;
+int treshold = 990;
 
 // the speed necessary to get the pump running
 int pumpOnSpeed = 200;
